@@ -13,6 +13,7 @@
 
 import React, { useState } from 'react';
 import { MapPin, Clock, Car, Utensils, ShoppingBag, Plane } from 'lucide-react';
+import InteractiveMap from './InteractiveMap';
 
 interface PointOfInterest {
   titlePlaceholder: string;
@@ -113,56 +114,37 @@ const NeighborhoodMapModule: React.FC<NeighborhoodMapModuleProps> = ({
             ))}
           </div>
 
-          {/* Map Section */}
+          {/* Interactive Map Section */}
           <div className="map-container">
-            <h3 className="text-lg font-semibold mb-4">Area Map</h3>
+            <h3 className="text-lg font-semibold mb-4">Property Location & Amenities</h3>
             
-            <div className="relative bg-muted rounded-lg overflow-hidden h-96 lg:h-full min-h-[400px]">
-              {!isMapLoaded ? (
-                /* Static Map Placeholder */
-                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-elegant">
-                  <div className="text-center">
-                    <MapPin size={48} className="text-accent mx-auto mb-4" />
-                    <h4 className="font-semibold mb-2">Interactive Map</h4>
-                    <p className="text-muted-foreground text-sm mb-4 max-w-xs">
-                      Click to load the interactive map showing nearby amenities and points of interest.
-                    </p>
-                    <button
-                      onClick={loadMap}
-                      className="btn-luxury btn-luxury--primary focus-luxury"
-                      aria-label="Load interactive map"
-                    >
-                      Load Map
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                /* Embedded Map */
-                <div className="w-full h-full">
-                  {mapEmbedUrl ? (
-                    <iframe
-                      src={mapEmbedUrl}
-                      title="Neighborhood map showing nearby amenities"
-                      className="w-full h-full border-0"
-                      loading="lazy"
-                      allowFullScreen
-                      referrerPolicy="no-referrer-when-downgrade"
-                      aria-label="Interactive map of the neighborhood"
-                    />
-                  ) : (
-                    /* Fallback map */
-                    <div className="w-full h-full bg-muted flex items-center justify-center">
-                      <div className="text-center">
-                        <MapPin size={32} className="text-accent mx-auto mb-2" />
-                        <p className="text-muted-foreground">
-                          Map currently unavailable
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+            <InteractiveMap 
+              className="h-96 lg:h-full min-h-[400px]"
+              showControls={true}
+              propertyLocation={[-68.8877, 18.4206]}
+              amenities={[
+                {
+                  name: 'Teeth of the Dog Golf Course',
+                  coordinates: [-68.8875, 18.4210],
+                  type: 'golf'
+                },
+                {
+                  name: 'Casa de Campo Marina',
+                  coordinates: [-68.8830, 18.4180],
+                  type: 'marina'
+                },
+                {
+                  name: 'La Romana Airport',
+                  coordinates: [-68.9120, 18.4507],
+                  type: 'airport'
+                },
+                {
+                  name: 'Casa de Campo Village',
+                  coordinates: [-68.8860, 18.4195],
+                  type: 'shopping'
+                }
+              ]}
+            />
 
             {/* Map Controls/Legend */}
             <div className="mt-4 flex flex-wrap gap-2 text-sm text-muted-foreground">

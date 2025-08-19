@@ -14,6 +14,7 @@
 
 import React, { useState } from 'react';
 import { Calendar, Mail, Phone, CheckCircle, AlertCircle } from 'lucide-react';
+import ProfessionalCalendar from './ProfessionalCalendar';
 
 interface ContactFormField {
   name: string;
@@ -240,32 +241,17 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
               </p>
             </div>
 
-            <div className="bg-card rounded-lg overflow-hidden min-h-[400px]">
-              {!isCalendarLoaded ? (
-                <div className="h-full flex flex-col items-center justify-center p-8 text-center">
-                  <Calendar size={48} className="text-accent mb-4" />
-                  <h4 className="font-semibold mb-2">Schedule Your Viewing</h4>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    Click below to access our scheduling calendar and book your private viewing.
-                  </p>
-                  <button
-                    onClick={loadCalendar}
-                    className="btn-luxury btn-luxury--primary focus-luxury"
-                    aria-label="Open calendar booking"
-                  >
-                    Open Calendar
-                  </button>
-                </div>
-              ) : (
-                <iframe
-                  src={calendlyEmbedUrl}
-                  title="Schedule a property viewing"
-                  className="w-full h-full min-h-[600px] border-0"
-                  loading="lazy"
-                  aria-label="Calendar booking widget"
-                />
-              )}
-            </div>
+            <ProfessionalCalendar 
+              onBookingSubmit={(bookingData) => {
+                console.log('Viewing scheduled:', bookingData);
+                // Handle booking submission
+                onContactSubmit({
+                  type: 'viewing_scheduled',
+                  ...bookingData
+                });
+              }}
+              className="bg-card rounded-lg"
+            />
           </div>
         </div>
 

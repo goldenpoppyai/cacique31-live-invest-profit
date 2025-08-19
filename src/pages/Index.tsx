@@ -163,11 +163,15 @@ const Index = () => {
 
   // Event handlers (placeholders for integration)
   const handlePrimaryAction = () => {
-    console.log('Primary CTA clicked');
+    // Scroll to contact section
+    const contactSection = document.querySelector('[role="region"][aria-label="Contact and scheduling"]');
+    contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSecondaryAction = () => {
-    console.log('Secondary CTA clicked');
+    // Scroll to details section (brochure download)
+    const detailsSection = document.querySelector('[role="region"][aria-label="Property details and specifications"]');
+    detailsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleBrochureSubmit = (formData: any) => {

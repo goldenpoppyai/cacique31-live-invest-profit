@@ -40,7 +40,26 @@ const Index = () => {
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143044518672000000-o.jpg",
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142537673676000000-o.jpg",
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142544253297000000-o.jpg",
-    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142555390709000000-o.jpg"
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142555390709000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142828655430000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142845810788000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142902719737000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142920482935000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142938155628000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142514550592000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143123038984000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143109348045000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142650999140000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142612315857000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142627505951000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142642531749000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142723235078000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142740424130000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142757301402000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142953069338000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143009999431000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143100597864000000-o.jpg",
+    "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143131260213000000-o.jpg"
   ];
 
   // Gallery images for the film strip
@@ -60,76 +79,76 @@ const Index = () => {
     lotSF: 33045,
     lotM2: 3070,
     yearBuilt: 2004,
-    view: "{{VIEW_PLACEHOLDER}}",
+    view: "Golf (Teeth of the Dog hole #1) — partial Caribbean views",
     poolBoolean: true,
-    infraFee: "{{INFRA_FEE_PLACEHOLDER}}"
+    infraFee: "74,412.36 (confirm currency)"
   };
 
   // Feature cards for property highlights
   const featureCards = [
     {
       iconSlot: <Crown size={32} />,
-      labelPlaceholder: "{{LUXURY_FEATURE_PLACEHOLDER}}",
-      benefitPlaceholder: "{{LUXURY_BENEFIT_PLACEHOLDER}}"
+      labelPlaceholder: "Architect-designed Villa Du Cacique",
+      benefitPlaceholder: "Immediate prestige and legacy value — exceptional design that reduces renovation needs."
     },
     {
       iconSlot: <Waves size={32} />,
-      labelPlaceholder: "{{POOL_FEATURE_PLACEHOLDER}}",
-      benefitPlaceholder: "{{POOL_BENEFIT_PLACEHOLDER}}"
+      labelPlaceholder: "Private pool & terrace",
+      benefitPlaceholder: "Private outdoor entertaining with low-visibility privacy."
     },
     {
       iconSlot: <TreePine size={32} />,
-      labelPlaceholder: "{{GARDEN_FEATURE_PLACEHOLDER}}",
-      benefitPlaceholder: "{{GARDEN_BENEFIT_PLACEHOLDER}}"
+      labelPlaceholder: "French-style manicured gardens",
+      benefitPlaceholder: "Scenic, event-ready grounds that elevate private events and curb appeal."
     },
     {
       iconSlot: <Shield size={32} />,
-      labelPlaceholder: "{{SECURITY_FEATURE_PLACEHOLDER}}",
-      benefitPlaceholder: "{{SECURITY_BENEFIT_PLACEHOLDER}}"
+      labelPlaceholder: "Gated community & on-site security",
+      benefitPlaceholder: "Controlled access and discreet privacy for high-net-worth owners."
     },
     {
       iconSlot: <Home size={32} />,
-      labelPlaceholder: "{{TURNKEY_FEATURE_PLACEHOLDER}}",
-      benefitPlaceholder: "{{TURNKEY_BENEFIT_PLACEHOLDER}}"
+      labelPlaceholder: "Turnkey condition",
+      benefitPlaceholder: "Move-in ready — saves months of work and significant renovation cost."
     },
     {
       iconSlot: <MapPin size={32} />,
-      labelPlaceholder: "{{LOCATION_FEATURE_PLACEHOLDER}}",
-      benefitPlaceholder: "{{LOCATION_BENEFIT_PLACEHOLDER}}"
+      labelPlaceholder: "Millionaires Row address",
+      benefitPlaceholder: "Exclusive, quiet neighborhood with a strong buyer pool and legacy appeal."
     }
   ];
 
   // Points of interest for neighborhood
   const pointsOfInterest = [
     {
-      titlePlaceholder: "{{GOLF_COURSE_NAME_PLACEHOLDER}}",
-      distancePlaceholder: "{{GOLF_DISTANCE_PLACEHOLDER}}",
+      titlePlaceholder: "Teeth of the Dog",
+      distancePlaceholder: "Immediate / on-property frontage",
       iconSlot: <TreePine size={24} />,
-      shortDescPlaceholder: "{{GOLF_DESCRIPTION_PLACEHOLDER}}"
+      shortDescPlaceholder: "Award-winning course ranked among the best in the Americas; direct golf frontage and scenic views."
     },
     {
-      titlePlaceholder: "{{MARINA_NAME_PLACEHOLDER}}",
-      distancePlaceholder: "{{MARINA_DISTANCE_PLACEHOLDER}}",
+      titlePlaceholder: "Casa de Campo Marina",
+      distancePlaceholder: "Short drive (approx. 10–15 minutes)",
       iconSlot: <Car size={24} />,
-      shortDescPlaceholder: "{{MARINA_DESCRIPTION_PLACEHOLDER}}"
+      shortDescPlaceholder: "Full-service marina with private berths, dining, and concierge leisure services."
     },
     {
-      titlePlaceholder: "{{RESTAURANT_NAME_PLACEHOLDER}}",
-      distancePlaceholder: "{{RESTAURANT_DISTANCE_PLACEHOLDER}}",
+      titlePlaceholder: "Casa de Campo fine dining (select venues)",
+      distancePlaceholder: "Short drive",
       iconSlot: <Utensils size={24} />,
-      shortDescPlaceholder: "{{RESTAURANT_DESCRIPTION_PLACEHOLDER}}"
+      shortDescPlaceholder: "Michelin-quality and private dining options available nearby via concierge."
     },
     {
-      titlePlaceholder: "{{SHOPPING_NAME_PLACEHOLDER}}",
-      distancePlaceholder: "{{SHOPPING_DISTANCE_PLACEHOLDER}}",
+      titlePlaceholder: "Casa de Campo village shopping",
+      distancePlaceholder: "Short drive",
       iconSlot: <ShoppingBag size={24} />,
-      shortDescPlaceholder: "{{SHOPPING_DESCRIPTION_PLACEHOLDER}}"
+      shortDescPlaceholder: "Curated boutiques, essential services, and private provisioning."
     },
     {
-      titlePlaceholder: "{{AIRPORT_NAME_PLACEHOLDER}}",
-      distancePlaceholder: "{{AIRPORT_DISTANCE_PLACEHOLDER}}",
+      titlePlaceholder: "La Romana International Airport (LRM)",
+      distancePlaceholder: "Approx. 25–30 minutes by car",
       iconSlot: <Plane size={24} />,
-      shortDescPlaceholder: "{{AIRPORT_DESCRIPTION_PLACEHOLDER}}"
+      shortDescPlaceholder: "Quick private and commercial connections; convenient discreet arrivals for owners and guests."
     }
   ];
 
@@ -164,10 +183,10 @@ const Index = () => {
       {/* Hero Section */}
       <HeroLayout
         heroImage={mediaUrls[0]}
-        titlePlaceholder="{{HERO_TITLE_PLACEHOLDER}}"
-        subheadPlaceholder="{{HERO_SUBTITLE_PLACEHOLDER}}"
-        ctaPrimaryPlaceholder="{{HERO_PRIMARY_CTA_PLACEHOLDER}}"
-        ctaSecondaryPlaceholder="{{HERO_SECONDARY_CTA_PLACEHOLDER}}"
+        titlePlaceholder="Own a Turnkey Villa on Millionaires Row — 31 Cacique — $7,000,000"
+        subheadPlaceholder="Move in immediately: 6 beds, 6 full + 3 half baths, 10,204 sq ft, private pool, French gardens, and direct frontage on Teeth of the Dog — unmatched privacy and lifestyle."
+        ctaPrimaryPlaceholder="Request a vetted private showing"
+        ctaSecondaryPlaceholder="Download the confidential brochure"
         onPrimaryClick={handlePrimaryAction}
         onSecondaryClick={handleSecondaryAction}
       />

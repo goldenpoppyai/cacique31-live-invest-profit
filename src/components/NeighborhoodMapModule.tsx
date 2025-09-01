@@ -1,19 +1,11 @@
 /**
  * NeighborhoodMapModule Component
  * 
- * Lightweight, responsive neighborhood module showing "5-minute life" microcards 
- * and a small interactive map (static map tile or embedded iframe fallback).
- * 
- * Required Props:
- * - pointsOfInterest: Array<{titlePlaceholder: string, distancePlaceholder: string, iconSlot: React.ReactNode, shortDescPlaceholder: string}>
- * 
- * Optional Props:
- * - mapEmbedUrl: string (URL for map embed)
+ * Lightweight, responsive neighborhood module with MapBox integration
  */
 
-import React, { useState } from 'react';
-import { MapPin, Clock, Car, Utensils, ShoppingBag, Plane } from 'lucide-react';
-import InteractiveMap from './InteractiveMap';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Clock } from 'lucide-react';
 
 interface PointOfInterest {
   titlePlaceholder: string;
@@ -33,151 +25,132 @@ const NeighborhoodMapModule: React.FC<NeighborhoodMapModuleProps> = ({
 }) => {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
+  useEffect(() => {
+    // Load MapBox script
+    if (!document.querySelector('script[src*="mapbox-gl"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js';
+      script.async = true;
+      document.head.appendChild(script);
+
+      const link = document.createElement('link');
+      link.href = 'https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+  }, []);
+
   const loadMap = () => {
     setIsMapLoaded(true);
+    
+    // Initialize MapBox map
+    setTimeout(() => {
+      const mapboxgl = (window as any).mapboxgl;
+      if (mapboxgl && document.getElementById('mapbox-container')) {
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZ29sZGVucG9wcHkiLCJhIjoiY21laWxmY3E5MDNrczJtczh2NGlqeml6cSJ9.BE8wGAFzHo2UwkVrhCX2WA';
+        
+        const map = new mapboxgl.Map({
+          container: 'mapbox-container',
+          style: 'mapbox://styles/mapbox/light-v11',
+          center: [-68.4565, 18.5204], // Casa de Campo coordinates
+          zoom: 14,
+          pitch: 45
+        });
+
+        // Add property marker
+        new mapboxgl.Marker({ color: '#b19762' })
+          .setLngLat([-68.4565, 18.5204])
+          .setPopup(new mapboxgl.Popup().setHTML('<h3>Villa Du Cacique</h3><p>31 Cacique, Casa de Campo</p>'))
+          .addTo(map);
+
+        // Add navigation controls
+        map.addControl(new mapboxgl.NavigationControl());
+      }
+    }, 100);
   };
 
-  // Default POI data if none provided (for demonstration)
-  const defaultPOI = [
-    {
-      titlePlaceholder: '{{GOLF_COURSE_NAME}}',
-      distancePlaceholder: '{{GOLF_DISTANCE}}',
-      iconSlot: <MapPin size={24} />,
-      shortDescPlaceholder: '{{GOLF_DESCRIPTION}}'
-    },
-    {
-      titlePlaceholder: '{{MARINA_NAME}}',
-      distancePlaceholder: '{{MARINA_DISTANCE}}',
-      iconSlot: <Car size={24} />,
-      shortDescPlaceholder: '{{MARINA_DESCRIPTION}}'
-    },
-    {
-      titlePlaceholder: '{{RESTAURANT_NAME}}',
-      distancePlaceholder: '{{RESTAURANT_DISTANCE}}',
-      iconSlot: <Utensils size={24} />,
-      shortDescPlaceholder: '{{RESTAURANT_DESCRIPTION}}'
-    },
-    {
-      titlePlaceholder: '{{SHOPPING_NAME}}',
-      distancePlaceholder: '{{SHOPPING_DISTANCE}}',
-      iconSlot: <ShoppingBag size={24} />,
-      shortDescPlaceholder: '{{SHOPPING_DESCRIPTION}}'
-    },
-    {
-      titlePlaceholder: '{{AIRPORT_NAME}}',
-      distancePlaceholder: '{{AIRPORT_DISTANCE}}',
-      iconSlot: <Plane size={24} />,
-      shortDescPlaceholder: '{{AIRPORT_DESCRIPTION}}'
-    }
-  ];
-
-  const displayPOI = pointsOfInterest.length > 0 ? pointsOfInterest : defaultPOI;
-
   return (
-    <section className="section-luxury" role="region" aria-label="Neighborhood amenities and location">
+    <section className="section-luxury" style={{ backgroundColor: '#f6f5f4' }}>
       <div className="container-luxury">
-        <h2 className="mb-8">Neighborhood & Location</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#121212' }}>
+            Prime Location Benefits
+          </h2>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: '#6b6b6b' }}>
+            Casa de Campo's most exclusive address with world-class amenities at your doorstep
+          </p>
+        </div>
 
-        <div className="map-row">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Points of Interest Cards */}
-          <div className="poi-list">
+          <div className="space-y-6">
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
-                <Clock size={20} className="text-accent" />
+              <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <Clock size={24} style={{ color: '#b19762' }} />
                 Your 5-Minute Life
               </h3>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm" style={{ color: '#6b6b6b' }}>
                 Everything you need within minutes of your front door
               </p>
             </div>
 
-            {displayPOI.map((poi, index) => (
-              <article key={index} className="card-luxury">
-                <div className="flex items-start gap-4">
-                  <div className="text-accent flex-shrink-0" aria-hidden="true">
-                    {poi.iconSlot}
-                  </div>
-                  
-                  <div className="flex-grow">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold">{poi.titlePlaceholder}</h4>
-                      <span className="text-accent text-sm font-medium">
-                        {poi.distancePlaceholder}
-                      </span>
+            <div className="space-y-4">
+              {pointsOfInterest.map((poi, index) => (
+                <div key={index} className="card-luxury p-4" style={{ backgroundColor: '#ffffff' }}>
+                  <div className="flex items-start gap-4">
+                    <div style={{ color: '#b19762' }} className="flex-shrink-0">
+                      {poi.iconSlot}
                     </div>
-                    <p className="text-muted-foreground text-sm">
-                      {poi.shortDescPlaceholder}
+                    
+                    <div className="flex-grow">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-semibold" style={{ color: '#121212' }}>
+                          {poi.titlePlaceholder}
+                        </h4>
+                        <span className="text-sm font-medium" style={{ color: '#b19762' }}>
+                          {poi.distancePlaceholder}
+                        </span>
+                      </div>
+                      <p className="text-sm" style={{ color: '#6b6b6b' }}>
+                        {poi.shortDescPlaceholder}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Map Section */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-semibold mb-4" style={{ color: '#121212' }}>
+              Property Location
+            </h3>
+            
+            {!isMapLoaded ? (
+              <div 
+                className="relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                style={{ backgroundColor: '#ffffff' }}
+                onClick={loadMap}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/10" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center space-y-3">
+                    <MapPin size={48} style={{ color: '#b19762' }} className="mx-auto" />
+                    <p className="font-medium" style={{ color: '#121212' }}>
+                      Click to load interactive map
+                    </p>
+                    <p className="text-sm" style={{ color: '#6b6b6b' }}>
+                      Explore Casa de Campo location
                     </p>
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Interactive Map Section */}
-          <div className="map-container">
-            <h3 className="text-lg font-semibold mb-4">Property Location & Amenities</h3>
-            
-            <InteractiveMap 
-              className="h-96 lg:h-full min-h-[400px]"
-              showControls={true}
-              propertyLocation={[-68.8877, 18.4206]}
-              amenities={[
-                {
-                  name: 'Teeth of the Dog Golf Course',
-                  coordinates: [-68.8875, 18.4210],
-                  type: 'golf'
-                },
-                {
-                  name: 'Casa de Campo Marina',
-                  coordinates: [-68.8830, 18.4180],
-                  type: 'marina'
-                },
-                {
-                  name: 'La Romana Airport',
-                  coordinates: [-68.9120, 18.4507],
-                  type: 'airport'
-                },
-                {
-                  name: 'Casa de Campo Village',
-                  coordinates: [-68.8860, 18.4195],
-                  type: 'shopping'
-                }
-              ]}
-            />
-
-            {/* Map Controls/Legend */}
-            <div className="mt-4 flex flex-wrap gap-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded-full bg-accent"></div>
-                Property Location
-              </span>
-              <span className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded-full bg-primary"></div>
-                Amenities
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Transportation Access */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card-luxury text-center">
-            <Car size={32} className="text-accent mx-auto mb-3" />
-            <h4 className="font-semibold mb-2">By Car</h4>
-            <p className="text-muted-foreground text-sm">Easy highway access and ample parking available.</p>
-          </div>
-          
-          <div className="card-luxury text-center">
-            <Plane size={32} className="text-accent mx-auto mb-3" />
-            <h4 className="font-semibold mb-2">Airport Access</h4>
-            <p className="text-muted-foreground text-sm">Private jet and commercial flight access nearby.</p>
-          </div>
-          
-          <div className="card-luxury text-center">
-            <MapPin size={32} className="text-accent mx-auto mb-3" />
-            <h4 className="font-semibold mb-2">Local Transport</h4>
-            <p className="text-muted-foreground text-sm">Resort shuttles and concierge transportation services.</p>
+              </div>
+            ) : (
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+                <div id="mapbox-container" className="w-full h-full"></div>
+              </div>
+            )}
           </div>
         </div>
       </div>

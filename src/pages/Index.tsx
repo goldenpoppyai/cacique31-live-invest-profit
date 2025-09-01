@@ -1,35 +1,35 @@
 /**
- * Luxury Villa Showcase - 31 Cacique
+ * Villa Du Cacique - Complete Luxury Landing Page
  * 
- * This page demonstrates 5 standalone luxury real estate components:
- * - HeroLayout: Cinematic hero with property showcase
- * - GalleryFilmStrip: Interactive property gallery
- * - DetailsSpecsGrid: Property specifications and features
- * - NeighborhoodMapModule: Location amenities and map
- * - ContactGatedFlow: Contact forms and scheduling
+ * Premium luxury real estate experience with:
+ * - YouTube hero video background
+ * - Property description with verified specs
+ * - ROI & Financing analysis sections
+ * - Interactive MapBox location module
+ * - Contact form with Exell Dream Estate branding
+ * - Virtual tour modal
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import HeroLayout from '../components/HeroLayout';
 import GalleryFilmStrip from '../components/GalleryFilmStrip';
-import DetailsSpecsGrid from '../components/DetailsSpecsGrid';
+import PropertyDescription from '../components/PropertyDescription';
+import ROIFinancingSection from '../components/ROIFinancingSection';
 import NeighborhoodMapModule from '../components/NeighborhoodMapModule';
 import ContactGatedFlow from '../components/ContactGatedFlow';
+import VirtualTourModal from '../components/VirtualTourModal';
 import { 
-  Home, 
-  Waves, 
   TreePine, 
   Car, 
   Utensils, 
   ShoppingBag, 
-  Plane,
-  Crown,
-  Shield,
-  MapPin 
+  Plane
 } from 'lucide-react';
 
 const Index = () => {
-  // Media URLs from the provided list
+  const [showVirtualTour, setShowVirtualTour] = useState(false);
+
+  // All 28 property images
   const mediaUrls = [
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143027022294000000-o.jpg",
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142605147224000000-o.jpg",
@@ -65,57 +65,55 @@ const Index = () => {
   // Gallery images for the film strip
   const galleryImages = mediaUrls.map((url, index) => ({
     src: url,
-    alt: `Villa 31 Cacique interior and exterior view ${index + 1}`,
-    captionPlaceholder: `{{GALLERY_CAPTION_${index + 1}_PLACEHOLDER}}`
+    alt: `Villa Du Cacique interior and exterior view ${index + 1}`,
+    captionPlaceholder: `Villa Du Cacique - View ${index + 1}`
   }));
 
-  // Property specifications
+  // Verified property specifications
   const propertySpecs = {
+    price: "$7,000,000 USD",
     bedrooms: 6,
-    baths: 6,
-    halfBaths: 3,
-    areaSF: 10204,
-    areaM2: 948,
-    lotSF: 33045,
-    lotM2: 3070,
-    yearBuilt: 2004,
-    view: "Golf (Teeth of the Dog hole #1) — partial Caribbean views",
-    poolBoolean: true,
-    infraFee: "74,412.36 (confirm currency)"
+    bathrooms: "6 full + 3 half bathrooms",
+    livingSpace: "11,001 sq ft",
+    lotSize: "43,130 sq ft (nearly 1 acre)",
+    yearBuilt: 2014,
+    annualRental: "$500,000 USD",
+    financing: "60% USD financing available"
   };
 
-  // Feature cards for property highlights
-  const featureCards = [
-    {
-      iconSlot: <Crown size={32} />,
-      labelPlaceholder: "Architect-designed Villa Du Cacique",
-      benefitPlaceholder: "Immediate prestige and legacy value — exceptional design that reduces renovation needs."
-    },
-    {
-      iconSlot: <Waves size={32} />,
-      labelPlaceholder: "Private pool & terrace",
-      benefitPlaceholder: "Private outdoor entertaining with low-visibility privacy."
-    },
-    {
-      iconSlot: <TreePine size={32} />,
-      labelPlaceholder: "French-style manicured gardens",
-      benefitPlaceholder: "Scenic, event-ready grounds that elevate private events and curb appeal."
-    },
-    {
-      iconSlot: <Shield size={32} />,
-      labelPlaceholder: "Gated community & on-site security",
-      benefitPlaceholder: "Controlled access and discreet privacy for high-net-worth owners."
-    },
-    {
-      iconSlot: <Home size={32} />,
-      labelPlaceholder: "Turnkey condition",
-      benefitPlaceholder: "Move-in ready — saves months of work and significant renovation cost."
-    },
-    {
-      iconSlot: <MapPin size={32} />,
-      labelPlaceholder: "Millionaires Row address",
-      benefitPlaceholder: "Exclusive, quiet neighborhood with a strong buyer pool and legacy appeal."
-    }
+  // Property story (verbatim from docs)
+  const propertyStory = "Live like an icon at the gorgeous Villa Du Cacique. Considered Casa De Campos MOST appreciated architecturally designed villa, is a bright, beautiful mansion located on Casa De Campo Millionaires row and is a lovely private location. Home to the former owner of Forbes Magazine Latin American and Latin Media Icon; this seven-bedroom, 8.5 bath, is immaculately designed, with incredible attention to detail. The luminous, generously proportioned interiors are simply unmatched at Casa De Campo. The villa sits on Teeth of the Dog hole #1, awarded the best golf course in the Americas, and with partial views of the Caribbean ocean, palatial style French gardens; there is enough chance of scenery to keep you from switching back to work mode.";
+
+  // Investment highlights
+  const investmentHighlights = [
+    "Proven track record: $500,000+ annual gross rental income",
+    "Premium location on Hole #1 of Teeth of the Dog Golf Course (Caribbean's #1 rated course)",
+    "One of Casa de Campo's largest corner lots (43,130 sq ft - nearly 1 acre)",
+    "Partial ocean views with unparalleled privacy and exclusivity",
+    "Strategic proximity to world-class amenities and international airports"
+  ];
+
+  // ROI metrics from docs
+  const roiMetrics = {
+    annualGrossIncome: "$500,000 USD",
+    monthlyAverage: "$41,667 USD",
+    netAnnualCashFlow: "$225,000",
+    grossRentalYield: "7.14%",
+    netRentalYield: "3.21%",
+    fiveYearTotalReturn: "$4,411,000",
+    annualizedReturn: "12.6%"
+  };
+
+  // Financing costs table
+  const financingCosts = [
+    { item: "Mortgage (P&I)", monthlyUSD: "$37,810" },
+    { item: "Property Taxes", monthlyUSD: "$2,000" },
+    { item: "HOA/Club Fees", monthlyUSD: "$525" },
+    { item: "Insurance", monthlyUSD: "$2,083" },
+    { item: "Maintenance Reserve", monthlyUSD: "$2,917" },
+    { item: "Utilities/Overhead", monthlyUSD: "$3,750" },
+    { item: "Property Management", monthlyUSD: "$8,333" },
+    { item: "TOTAL MONTHLY", monthlyUSD: "$57,418" }
   ];
 
   // Points of interest for neighborhood
@@ -157,42 +155,73 @@ const Index = () => {
     { name: 'name', label: 'Full Name', type: 'text', required: true },
     { name: 'email', label: 'Email Address', type: 'email', required: true },
     { name: 'phone', label: 'Phone Number', type: 'tel', required: true },
-    { name: 'preferredDates', label: 'Preferred Viewing Dates', type: 'text', required: false },
-    { name: 'proofOfFunds', label: 'I will provide proof of funds or broker introduction', type: 'checkbox', required: true }
+    { name: 'country', label: 'Country', type: 'select', required: true },
+    { name: 'interest', label: "I'm interested in...", type: 'textarea', required: false },
+    { name: 'marketing', label: 'I agree to receive marketing communications from Exell Dream Estate', type: 'checkbox', required: true }
   ];
 
-  // Event handlers (placeholders for integration)
+  // Event handlers
   const handlePrimaryAction = () => {
     // Scroll to contact section
-    const contactSection = document.querySelector('[role="region"][aria-label="Contact and scheduling"]');
+    const contactSection = document.querySelector('[aria-label="Contact and scheduling"]');
     contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleSecondaryAction = () => {
-    // Scroll to details section (brochure download)
-    const detailsSection = document.querySelector('[role="region"][aria-label="Property details and specifications"]');
-    detailsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll to ROI/Financing section
+    const roiSection = document.querySelector('[aria-label="ROI and financing analysis"]');
+    roiSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handleBrochureSubmit = (formData: any) => {
-    console.log('Brochure request:', formData);
+  const handleVirtualTour = () => {
+    setShowVirtualTour(true);
+  };
+
+  const handleROIDownload = () => {
+    window.open('/Exell_ROI.pdf', '_blank');
+  };
+
+  const handleFinancingDownload = () => {
+    window.open('/Exell_Financing.pdf', '_blank');
+  };
+
+  const handlePersonalizedWorksheet = () => {
+    handlePrimaryAction(); // Scroll to contact form
+  };
+
+  const handleBrochureDownload = () => {
+    // Handle brochure download - could combine both PDFs or create new brochure
+    handleROIDownload();
+    handleFinancingDownload();
   };
 
   const handleContactSubmit = (formData: any) => {
     console.log('Contact form submission:', formData);
+    // Here you would typically send to CRM/email service
+    alert('Thank you for your interest! We will contact you within 24 hours.');
   };
 
   return (
     <main id="main-content">
-      {/* Hero Section */}
+      {/* Hero Section with YouTube Video */}
       <HeroLayout
         heroImage={mediaUrls[0]}
+        heroVideo="youtube"
         titlePlaceholder="Own a Turnkey Villa on Millionaires Row — 31 Cacique — $7,000,000"
-        subheadPlaceholder="Move in immediately: 6 beds, 6 full + 3 half baths, 10,204 sq ft, private pool, French gardens, and direct frontage on Teeth of the Dog — unmatched privacy and lifestyle."
-        ctaPrimaryPlaceholder="Request a vetted private showing"
-        ctaSecondaryPlaceholder="Download the confidential brochure"
+        subheadPlaceholder="Casa de Campo's Number 1 Luxury Property! This Stunning Estate Is Guaranteed To Impress."
+        ctaPrimaryPlaceholder="Request Your Private Tour"
+        ctaSecondaryPlaceholder="Explore Financing"
+        ctaTertiaryPlaceholder="Virtual Tour"
         onPrimaryClick={handlePrimaryAction}
         onSecondaryClick={handleSecondaryAction}
+        onTertiaryClick={handleVirtualTour}
+      />
+
+      {/* Property Description Section */}
+      <PropertyDescription
+        specs={propertySpecs}
+        story={propertyStory}
+        highlights={investmentHighlights}
       />
 
       {/* Gallery Section */}
@@ -201,24 +230,37 @@ const Index = () => {
         initialIndex={0}
       />
 
-      {/* Property Details & Specs */}
-      <DetailsSpecsGrid
-        specs={propertySpecs}
-        featureCards={featureCards}
-        onSubmit={handleBrochureSubmit}
-      />
+      {/* ROI & Financing Section */}
+      <div role="region" aria-label="ROI and financing analysis">
+        <ROIFinancingSection
+          roiMetrics={roiMetrics}
+          financingCosts={financingCosts}
+          onROIDownload={handleROIDownload}
+          onFinancingDownload={handleFinancingDownload}
+          onPersonalizedWorksheet={handlePersonalizedWorksheet}
+        />
+      </div>
 
-      {/* Neighborhood & Location */}
+      {/* Location & Amenities */}
       <NeighborhoodMapModule
         pointsOfInterest={pointsOfInterest}
-        mapEmbedUrl="{{MAP_EMBED_URL_PLACEHOLDER}}"
+        mapEmbedUrl=""
       />
 
-      {/* Contact & Scheduling */}
-      <ContactGatedFlow
-        calendlyEmbedUrl="{{CALENDLY_EMBED_URL_PLACEHOLDER}}"
-        contactFormFields={contactFormFields}
-        onContactSubmit={handleContactSubmit}
+      {/* Contact Section */}
+      <div role="region" aria-label="Contact and scheduling">
+        <ContactGatedFlow
+          calendlyEmbedUrl=""
+          contactFormFields={contactFormFields}
+          onContactSubmit={handleContactSubmit}
+        />
+      </div>
+
+      {/* Virtual Tour Modal */}
+      <VirtualTourModal
+        isOpen={showVirtualTour}
+        onClose={() => setShowVirtualTour(false)}
+        onBrochureDownload={handleBrochureDownload}
       />
     </main>
   );

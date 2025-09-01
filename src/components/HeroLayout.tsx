@@ -26,8 +26,10 @@ interface HeroLayoutProps {
   subheadPlaceholder: string;
   ctaPrimaryPlaceholder: string;
   ctaSecondaryPlaceholder: string;
+  ctaTertiaryPlaceholder?: string;
   onPrimaryClick?: () => void;
   onSecondaryClick?: () => void;
+  onTertiaryClick?: () => void;
 }
 
 const HeroLayout: React.FC<HeroLayoutProps> = ({
@@ -37,8 +39,10 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
   subheadPlaceholder,
   ctaPrimaryPlaceholder,
   ctaSecondaryPlaceholder,
+  ctaTertiaryPlaceholder,
   onPrimaryClick,
   onSecondaryClick,
+  onTertiaryClick,
 }) => {
   return (
     <section className="hero-luxury" role="banner">
@@ -52,18 +56,17 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
 
       {/* Hero Media */}
       {heroVideo ? (
-        <video
-          className="hero-luxury__media"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={heroImage}
-          aria-label="Villa showcase video"
-        >
-          <source src={heroVideo} type="video/mp4" />
-          <img src={heroImage} alt="Villa exterior showcase" className="hero-luxury__media" loading="eager" />
-        </video>
+        <div className="relative w-full h-screen overflow-hidden">
+          <iframe 
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://www.youtube-nocookie.com/embed/HfusuzIQwig?si=IYra_rB-kdItKwqq&controls=0&start=4&autoplay=1&mute=1&loop=1&playlist=HfusuzIQwig"
+            title="Villa Du Cacique" 
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin" 
+            allowFullScreen
+          />
+        </div>
       ) : (
         <picture>
           <source
@@ -107,6 +110,7 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
           <button
             onClick={onPrimaryClick}
             className="btn-luxury btn-luxury--primary focus-luxury"
+            style={{ background: 'linear-gradient(180deg, #b19762, #a08856)' }}
             aria-label={ctaPrimaryPlaceholder}
           >
             {ctaPrimaryPlaceholder}
@@ -119,6 +123,16 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
           >
             {ctaSecondaryPlaceholder}
           </button>
+
+          {ctaTertiaryPlaceholder && (
+            <button
+              onClick={onTertiaryClick}
+              className="btn-luxury btn-luxury--ghost text-white border-white/20 hover:bg-white/10 focus-luxury"
+              aria-label={ctaTertiaryPlaceholder}
+            >
+              {ctaTertiaryPlaceholder}
+            </button>
+          )}
         </div>
 
         {/* Microtrust Line */}

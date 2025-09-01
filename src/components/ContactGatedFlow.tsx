@@ -45,8 +45,9 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
     { name: 'name', label: 'Full Name', type: 'text', required: true },
     { name: 'email', label: 'Email Address', type: 'email', required: true },
     { name: 'phone', label: 'Phone Number', type: 'tel', required: true },
-    { name: 'preferredDates', label: 'Preferred Viewing Dates', type: 'text', required: false },
-    { name: 'proofOfFunds', label: 'I will provide proof of funds or broker introduction', type: 'checkbox', required: true }
+    { name: 'country', label: 'Country', type: 'select', required: true },
+    { name: 'interest', label: "I'm interested in...", type: 'textarea', required: false },
+    { name: 'marketing', label: 'I agree to receive marketing communications from Exell Dream Estate', type: 'checkbox', required: true }
   ];
 
   const fields = contactFormFields.length > 0 ? contactFormFields : defaultFields;
@@ -128,6 +129,42 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
           </label>
         );
 
+      case 'select':
+        return (
+          <div key={field.name}>
+            <label htmlFor={field.name} className="block text-sm font-medium mb-1">
+              {field.label}
+              {field.required && <span className="text-destructive ml-1">*</span>}
+            </label>
+            <select
+              id={field.name}
+              value={value}
+              onChange={(e) => handleInputChange(field.name, e.target.value)}
+              className="w-full px-3 py-2 border border-input rounded-md focus:ring-2 focus:ring-accent focus:border-accent"
+              aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+            >
+              <option value="">Select a country</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="UK">United Kingdom</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="ES">Spain</option>
+              <option value="IT">Italy</option>
+              <option value="NL">Netherlands</option>
+              <option value="BE">Belgium</option>
+              <option value="CH">Switzerland</option>
+              <option value="AU">Australia</option>
+              <option value="OTHER">Other</option>
+            </select>
+            {errors[field.name] && (
+              <p id={`${field.name}-error`} className="text-destructive text-sm mt-1">
+                {errors[field.name]}
+              </p>
+            )}
+          </div>
+        );
+
       case 'textarea':
         return (
           <div key={field.name}>
@@ -177,30 +214,35 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
   };
 
   return (
-    <section className="section-luxury bg-gradient-elegant" role="region" aria-label="Contact and scheduling">
+    <section className="section-luxury" style={{ backgroundColor: '#f6f5f4' }}>
       <div className="container-luxury">
-        <h2 className="text-center mb-12">Contact & Schedule Private Viewing</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#121212' }}>
+            Request Your Private Tour
+          </h2>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b6b6b' }}>
+            Discover every detail of Villa Du Cacique: floor plans, amenities, and income potential. Fill in your info, and receive the confidential brochure instantly.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
-          <div className="space-y-6">
-            <div>
+          <div className="card-luxury p-8 mb-8" style={{ backgroundColor: '#ffffff' }}>
+            <div className="mb-6">
               <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Mail size={24} className="text-accent" />
+                <Mail size={24} style={{ color: '#b19762' }} />
                 Request Information
               </h3>
-              <p className="text-muted-foreground">
-                Complete the form below to receive detailed property information and schedule your private viewing.
-              </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {fields.map(renderFormField)}
 
               <button
                 type="submit"
                 disabled={isSubmitted}
                 className="w-full btn-luxury btn-luxury--primary focus-luxury disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ background: 'linear-gradient(180deg, #b19762, #a08856)' }}
               >
                 {isSubmitted ? (
                   <>
@@ -212,46 +254,36 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
                 )}
               </button>
             </form>
-
-            {/* Contact Info */}
-            <div className="pt-6 border-t border-border space-y-3">
-              <h4 className="font-semibold">Direct Contact</h4>
-              
-              <div className="flex items-center gap-3">
-                <Phone size={18} className="text-accent" />
-                <span>+1 (555) 123-4567</span>
-              </div>
-              
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-accent" />
-                <span>luxury@example.com</span>
-              </div>
-            </div>
           </div>
 
-          {/* Calendar Section */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Calendar size={24} className="text-accent" />
-                Schedule Your Visit
-              </h3>
-              <p className="text-muted-foreground">
-                Book your exclusive viewing at your convenience.
-              </p>
+          {/* Contact Info */}
+          <div className="card-luxury p-6" style={{ backgroundColor: '#ffffff' }}>
+            <div className="text-center space-y-4">
+              <h4 className="font-semibold" style={{ color: '#121212' }}>
+                Direct Contact
+              </h4>
+              
+              <div className="space-y-3">
+                <div className="flex items-center justify-center gap-3">
+                  <Phone size={18} style={{ color: '#b19762' }} />
+                  <span style={{ color: '#6b6b6b' }}>Sam Vekemans</span>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3">
+                  <Phone size={18} style={{ color: '#b19762' }} />
+                  <span style={{ color: '#6b6b6b' }}>+32 476 87 22 40</span>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3">
+                  <Mail size={18} style={{ color: '#b19762' }} />
+                  <span style={{ color: '#6b6b6b' }}>sam@exell.marketing</span>
+                </div>
+                
+                <div className="text-sm font-medium" style={{ color: '#121212' }}>
+                  Exell Dream Estate
+                </div>
+              </div>
             </div>
-
-            <ProfessionalCalendar 
-              onBookingSubmit={(bookingData) => {
-                console.log('Viewing scheduled:', bookingData);
-                // Handle booking submission
-                onContactSubmit({
-                  type: 'viewing_scheduled',
-                  ...bookingData
-                });
-              }}
-              className="bg-card rounded-lg"
-            />
           </div>
         </div>
 

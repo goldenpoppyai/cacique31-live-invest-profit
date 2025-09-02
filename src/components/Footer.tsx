@@ -140,7 +140,7 @@ const Footer: React.FC = () => {
             </p>
             
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4">
-              <p>&copy; 2024 Exell Dream Estate. All rights reserved.</p>
+              <p>&copy; 2025 Exell Dream Estate. All rights reserved.</p>
               <p>Villa Du Cacique - Casa de Campo Exclusive Listing</p>
             </div>
           </div>

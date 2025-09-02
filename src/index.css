@@ -127,7 +127,7 @@
   /* Hero Layout System */
   .hero-luxury {
     position: relative;
-    min-height: 60vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -273,7 +273,7 @@
   /* Responsive Adjustments */
   @media (min-width: 1024px) {
     .hero-luxury {
-      min-height: 80vh;
+      height: 100vh;
     }
     
     .hero-luxury__content {
@@ -294,7 +294,7 @@
     }
     
     .hero-luxury {
-      min-height: 54vh;
+      height: 100vh;
     }
     
     .thumb-luxury {

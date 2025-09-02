@@ -30,8 +30,8 @@ const InteractiveMap: React.FC<MapProps> = ({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [userToken, setUserToken] = useState('');
-  const [showTokenInput, setShowTokenInput] = useState(true);
+  const [userToken, setUserToken] = useState('pk.eyJ1IjoiZ29sZGVucG9wcHkiLCJhIjoiY21laWxmY3E5MDNrczJtczh2NGlqeml6cSJ9.BE8wGAFzHo2UwkVrhCX2WA');
+  const [showTokenInput, setShowTokenInput] = useState(false);
 
   const defaultAmenities = [
     {
@@ -61,7 +61,7 @@ const InteractiveMap: React.FC<MapProps> = ({
   const initializeMap = (token: string) => {
     if (!mapContainer.current || !token) return;
 
-    mapboxgl.accessToken = token;
+    mapboxgl.accessToken = userToken;
     
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -167,6 +167,16 @@ const InteractiveMap: React.FC<MapProps> = ({
       initializeMap(userToken);
     }
   };
+
+  useEffect(() => {
+    // Initialize map with provided token on mount
+    initializeMap(userToken);
+    
+    // Cleanup on unmount
+    return () => {
+      map.current?.remove();
+    };
+  }, []);
 
   if (showTokenInput) {
     return (

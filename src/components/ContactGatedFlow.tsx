@@ -287,7 +287,7 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
                 
                 <div className="flex items-center justify-center gap-3">
                   <Mail size={18} style={{ color: '#b19762' }} />
-                  <span style={{ color: '#6b6b6b' }}>sam@exell.marketing</span>
+                  <span style={{ color: '#6b6b6b' }}>sam@exelldreamestate.com</span>
                 </div>
                 
                 <div className="text-sm font-medium" style={{ color: '#121212' }}>

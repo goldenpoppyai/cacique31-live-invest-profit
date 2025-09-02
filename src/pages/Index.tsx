@@ -14,12 +14,13 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroLayout from '../components/HeroLayout';
-import GalleryFilmStrip from '../components/GalleryFilmStrip';
+import CinematicGallery from '../components/CinematicGallery';
 import PropertyDescription from '../components/PropertyDescription';
 import ROIFinancingSection from '../components/ROIFinancingSection';
 import NeighborhoodMapModule from '../components/NeighborhoodMapModule';
 import ContactGatedFlow from '../components/ContactGatedFlow';
 import VirtualTourModal from '../components/VirtualTourModal';
+import SamContactSection from '../components/SamContactSection';
 import { 
   TreePine, 
   Car, 
@@ -64,11 +65,11 @@ const Index = () => {
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143131260213000000-o.jpg"
   ];
 
-  // Gallery images for the film strip
+  // Gallery images for the cinematic gallery
   const galleryImages = mediaUrls.map((url, index) => ({
     src: url,
     alt: `Villa Du Cacique interior and exterior view ${index + 1}`,
-    captionPlaceholder: `Villa Du Cacique - View ${index + 1}`
+    caption: `Villa Du Cacique - View ${index + 1}`
   }));
 
   // Verified property specifications
@@ -209,12 +210,12 @@ const Index = () => {
       <Header />
       
       <main id="main-content">
-      {/* Hero Section with YouTube Video */}
+      {/* Hero Section with Full-Screen Video */}
       <HeroLayout
         heroImage={mediaUrls[0]}
         heroVideo="youtube"
-        titlePlaceholder="Own a Turnkey Villa on Millionaires Row — 31 Cacique — $7,000,000"
-        subheadPlaceholder="Casa de Campo's Number 1 Luxury Property! This Stunning Estate Is Guaranteed To Impress."
+        titlePlaceholder="Are you looking for your own piece of paradise?"
+        subheadPlaceholder="Let's turn your dream into reality, for free!"
         ctaPrimaryPlaceholder="Request Your Private Tour"
         ctaSecondaryPlaceholder="Explore Financing"
         ctaTertiaryPlaceholder="Virtual Tour"
@@ -230,10 +231,9 @@ const Index = () => {
         highlights={investmentHighlights}
       />
 
-      {/* Gallery Section */}
-      <GalleryFilmStrip
+      {/* Cinematic Gallery Section */}
+      <CinematicGallery
         images={galleryImages}
-        initialIndex={0}
       />
 
       {/* ROI & Financing Section */}
@@ -247,11 +247,14 @@ const Index = () => {
         />
       </div>
 
-      {/* Location & Amenities */}
+      {/* Location & Interactive Map */}
       <NeighborhoodMapModule
         pointsOfInterest={pointsOfInterest}
         mapEmbedUrl=""
       />
+
+      {/* Sam's Professional Contact Section */}
+      <SamContactSection />
 
       {/* Contact Section */}
       <div role="region" aria-label="Contact and scheduling">

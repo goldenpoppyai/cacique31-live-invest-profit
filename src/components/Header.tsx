@@ -15,7 +15,19 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between py-4">
           {/* Logo & Brand */}
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
+            <img
+              src="/Exell_DreamEstate_logo.webp"
+              alt="Exell Dream Estate Logo"
+              className="w-12 h-12 object-contain"
+              onError={(e) => {
+                // Fallback to text logo if image fails to load
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = target.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
+            <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center" style={{ display: 'none' }}>
               <span className="text-accent-foreground font-bold text-xl">E</span>
             </div>
             <div>
@@ -36,7 +48,7 @@ const Header: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail size={16} className="text-accent" />
-              <span>sam@exell.marketing</span>
+              <span>sam@exelldreamestate.com</span>
             </div>
           </div>
 

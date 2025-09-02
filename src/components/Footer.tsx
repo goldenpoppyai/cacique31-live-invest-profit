@@ -71,10 +71,10 @@ const Footer: React.FC = () => {
                 <Mail size={18} className="text-accent mt-1 flex-shrink-0" />
                 <div>
                   <a 
-                    href="mailto:sam@exell.marketing"
+                    href="mailto:sam@exelldreamestate.com"
                     className="text-background hover:text-accent transition-colors"
                   >
-                    sam@exell.marketing
+                    sam@exelldreamestate.com
                   </a>
                 </div>
               </div>

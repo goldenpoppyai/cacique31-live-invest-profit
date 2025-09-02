@@ -61,11 +61,19 @@ const PropertyDescription: React.FC<PropertyDescriptionProps> = ({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Property Story */}
-          <div className="space-y-6">
-            <div className="prose prose-lg max-w-none">
+          {/* Property Story - Three Well-Spaced Paragraphs */}
+          <div className="space-y-8">
+            <div className="prose prose-lg max-w-none space-y-6">
               <p className="text-lg leading-relaxed" style={{ color: '#6b6b6b' }}>
-                {story}
+                Live like an icon at the gorgeous Villa Du Cacique. Considered Casa De Campos MOST appreciated architecturally designed villa, is a bright, beautiful mansion located on Casa De Campo Millionaires row and is a lovely private location.
+              </p>
+              
+              <p className="text-lg leading-relaxed" style={{ color: '#6b6b6b' }}>
+                Home to the former owner of Forbes Magazine Latin American and Latin Media Icon; this seven-bedroom, 8.5 bath, is immaculately designed, with incredible attention to detail. The luminous, generously proportioned interiors are simply unmatched at Casa De Campo.
+              </p>
+              
+              <p className="text-lg leading-relaxed" style={{ color: '#6b6b6b' }}>
+                The villa sits on Teeth of the Dog hole #1, awarded the best golf course in the Americas, and with partial views of the Caribbean ocean, palatial style French gardens; there is enough chance of scenery to keep you from switching back to work mode.
               </p>
             </div>
           </div>

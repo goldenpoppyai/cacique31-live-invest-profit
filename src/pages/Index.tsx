@@ -11,6 +11,8 @@
  */
 
 import React, { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import HeroLayout from '../components/HeroLayout';
 import GalleryFilmStrip from '../components/GalleryFilmStrip';
 import PropertyDescription from '../components/PropertyDescription';
@@ -202,7 +204,11 @@ const Index = () => {
   };
 
   return (
-    <main id="main-content">
+    <>
+      {/* Header */}
+      <Header />
+      
+      <main id="main-content">
       {/* Hero Section with YouTube Video */}
       <HeroLayout
         heroImage={mediaUrls[0]}
@@ -262,7 +268,11 @@ const Index = () => {
         onClose={() => setShowVirtualTour(false)}
         onBrochureDownload={handleBrochureDownload}
       />
-    </main>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </>
   );
 };
 

@@ -94,7 +94,18 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
     e.preventDefault();
     
     if (validateForm()) {
-      onContactSubmit(formData);
+      // Enhanced submission data with tracking
+      const submissionData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        property: 'Villa Du Cacique',
+        source: 'Landing Page Contact Form',
+        utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || 'website',
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || 'villa-du-cacique'
+      };
+      
+      onContactSubmit(submissionData);
       setIsSubmitted(true);
       setShowSuccessModal(true);
     }
@@ -303,15 +314,16 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
               </h3>
               
               <p className="text-muted-foreground mb-6">
-                Your request has been received. We'll contact you within 24 hours.
+                Your request has been received. Check your email for the confidential brochure and we will contact you within 24 hours to schedule your private tour.
               </p>
 
               <div className="bg-gradient-elegant p-4 rounded-lg mb-6">
                 <h4 className="font-semibold mb-2">Next Steps</h4>
                 <ul className="text-sm text-muted-foreground space-y-1 text-left">
+                  <li>• Confidential brochure sent to your email</li>
                   <li>• Personal consultation within 24 hours</li>
-                  <li>• Detailed property brochure delivery</li>
                   <li>• Private viewing scheduling</li>
+                  <li>• Financing consultation available</li>
                 </ul>
               </div>
 

@@ -8,27 +8,27 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 35 14% 96%; /* #F6F5F3 off-white */
-    --foreground: 0 0% 7%; /* #121212 charcoal */
+    /* Exell Dream Estate Brand Colors */
+    --background: 35 12% 96%; /* #F6F5F4 light grey */
+    --foreground: 0 0% 7%; /* #121212 black */
     
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
+    --card: 0 0% 100%; /* #FFFFFF white */
+    --card-foreground: 0 0% 7%; /* #121212 black */
     
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
     
-    /* Luxury Accent System */
-    --primary: 203 80% 16%; /* #0B2545 muted navy */
+    /* Brand Gold System */
+    --primary: 39 32% 56%; /* #B19762 brand gold */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 40 35% 58%; /* #C8A15F deep gold */
+    --secondary: 39 32% 56%; /* #B19762 brand gold */
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 42%; /* #6B6B6B */
-    --muted-foreground: 0 0% 42%;
+    --muted: 0 0% 42%; /* #6B6B6B grey */
+    --muted-foreground: 0 0% 42%; /* #6B6B6B grey */
     
-    --accent: 40 35% 58%; /* warm gold */
+    --accent: 39 32% 56%; /* #B19762 brand gold */
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
@@ -45,10 +45,10 @@
     --ease-std: cubic-bezier(.4,.0,.2,1);
     --focus: 3px solid hsl(40 35% 58% / 0.18);
     
-    /* Gradients */
-    --gradient-warm: linear-gradient(180deg, hsl(40 35% 58%), hsl(40 35% 48%));
-    --gradient-hero: linear-gradient(180deg, rgba(10,10,10,0.12) 0%, rgba(10,10,10,0.28) 60%);
-    --gradient-elegant: linear-gradient(135deg, hsl(40 35% 58% / 0.1), hsl(203 80% 16% / 0.05));
+    /* Brand Gradients */
+    --gradient-warm: linear-gradient(180deg, hsl(39 32% 56%), hsl(39 32% 46%)); /* Gold gradient */
+    --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 70%);
+    --gradient-elegant: linear-gradient(135deg, hsl(39 32% 56% / 0.1), hsl(39 32% 56% / 0.05));
     
     --radius: 0.75rem;
   }

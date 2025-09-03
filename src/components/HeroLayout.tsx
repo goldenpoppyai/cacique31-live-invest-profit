@@ -96,43 +96,54 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
       {/* Hero Overlay */}
       <div className="hero-luxury__overlay" aria-hidden="true" />
 
-      {/* Centered Hero Content */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="text-center max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl mb-6 leading-tight">
+      {/* Left-Aligned Hero Content */}
+      <div className="absolute inset-0 flex items-center justify-start z-10">
+        <div className="text-left max-w-4xl ml-6 lg:ml-20 px-6">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gold-400 drop-shadow-2xl mb-4 leading-tight">
             — Villa du Cacique —<br />
-            Own the Dream. Without the Cost.<br />
-            <span className="text-3xl md:text-5xl lg:text-6xl text-gold-400">
-              Tailored financing and premium rental <br />
-              meets luxury living in Caribbean's <br />
-              most prestigious address. <br />
-              Enjoy the Villa, not the bills. 
-            </span>
+            Own the Dream. Without the Cost.
           </h1>
+          
+          <p className="text-2xl md:text-4xl lg:text-5xl font-semibold text-white drop-shadow-2xl mb-8 leading-tight">
+            Tailored financing and premium rental <br />
+            meets luxury living in Caribbean's <br />
+            most prestigious address. <br />
+            Enjoy the Villa, not the bills.
+          </p>
 
-          {/* Two Prominent CTAs */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-8">
+          {/* Three CTAs Left-Aligned */}
+          <div className="flex flex-col sm:flex-row gap-4 items-start mt-8">
             <button
               onClick={onPrimaryClick}
               className="px-8 py-4 text-lg font-bold text-white rounded-xl shadow-2xl hover:scale-105 transition-all duration-300 min-w-[280px]"
               style={{ background: 'linear-gradient(135deg, #b19762, #a08856)' }}
-              aria-label="Request Your Private Tour"
+              aria-label="Secure Your Private Viewing"
             >
-              Request Your Private Tour
+              Secure Your Private Viewing
             </button>
             
             <button
               onClick={onSecondaryClick}
               className="px-8 py-4 text-lg font-bold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300 min-w-[280px]"
-              aria-label="Explore Financing"
+              aria-label="Discover Your Financing Advantage"
             >
-              Explore Financing
+              Discover Your Financing Advantage
             </button>
+            
+            {ctaTertiaryPlaceholder && (
+              <button
+                onClick={onTertiaryClick}
+                className="px-8 py-4 text-lg font-bold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300 min-w-[280px]"
+                aria-label="Experience the Virtual Tour"
+              >
+                Experience the Virtual Tour
+              </button>
+            )}
           </div>
 
           {/* Microtrust Line */}
           <p className="text-white/70 text-sm mt-6">
-            Exclusive listing • Verified ownership • Private showings only
+            Exclusive listing • Private viewings only • Verified expert consultation
           </p>
         </div>
       </div>

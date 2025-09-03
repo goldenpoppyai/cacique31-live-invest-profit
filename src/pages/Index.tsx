@@ -10,7 +10,7 @@
  * - Virtual tour modal
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroLayout from '../components/HeroLayout';
@@ -18,9 +18,8 @@ import CinematicGallery from '../components/CinematicGallery';
 import PropertyDescription from '../components/PropertyDescription';
 import ROIFinancingSection from '../components/ROIFinancingSection';
 import NeighborhoodMapModule from '../components/NeighborhoodMapModule';
-import ContactGatedFlow from '../components/ContactGatedFlow';
+import MergedContactSection from '../components/MergedContactSection';
 import VirtualTourModal from '../components/VirtualTourModal';
-import SamContactSection from '../components/SamContactSection';
 import { 
   TreePine, 
   Car, 
@@ -31,6 +30,13 @@ import {
 
 const Index = () => {
   const [showVirtualTour, setShowVirtualTour] = useState(false);
+
+  // Add virtual tour event listener
+  useEffect(() => {
+    const handleOpenVirtualTour = () => setShowVirtualTour(true);
+    window.addEventListener('openVirtualTour', handleOpenVirtualTour);
+    return () => window.removeEventListener('openVirtualTour', handleOpenVirtualTour);
+  }, []);
 
   // All 28 property images
   const mediaUrls = [
@@ -65,12 +71,154 @@ const Index = () => {
     "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143131260213000000-o.jpg"
   ];
 
-  // Gallery images for the cinematic gallery
-  const galleryImages = mediaUrls.map((url, index) => ({
-    src: url,
-    alt: `Villa Du Cacique interior and exterior view ${index + 1}`,
-    caption: `Villa Du Cacique - View ${index + 1}`
-  }));
+  // Gallery images with specific captions and alt text
+  const galleryImages = [
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143027022294000000-o.jpg",
+      alt: "Grand living room with tufted sofas, mezzanine and crystal chandeliers — Villa du Cacique interior, Casa de Campo, Dominican Republic",
+      caption: "Grand living room"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142605147224000000-o.jpg", 
+      alt: "Aerial view of Villa du Cacique estate showing formal gardens and approach — Casa de Campo, Dominican Republic",
+      caption: "Aerial view of estate"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017134103072434000000-o.jpg",
+      alt: "Front façade and illuminated driveway with manicured parterres — Villa du Cacique entrance, Casa de Campo",
+      caption: "Formal entrance"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142525164951000000-o.jpg",
+      alt: "Archway entrance with wooden bridge leading through to the central courtyard — Villa du Cacique, Casa de Campo",
+      caption: "Entry archway"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142813128407000000-o.jpg",
+      alt: "View through open blue gates toward gardens and golf course — exterior gate view, Villa du Cacique Casa de Campo",
+      caption: "Gate view to gardens"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142531522780000000-o.jpg",
+      alt: "Private pool, terrace and thatched palapa lounge beside the main house — Villa du Cacique outdoor living, Casa de Campo",
+      caption: "Pool & palapa"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143044518672000000-o.jpg",
+      alt: "Large paved central courtyard framed by arched colonnades and the main entrance — Villa du Cacique, Casa de Campo",
+      caption: "Central courtyard"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142537673676000000-o.jpg",
+      alt: "Pool, palapa and poolside seating with landscaped lawn beyond — Villa du Cacique outdoor entertaining, Casa de Campo",
+      caption: "Poolside view"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142544253297000000-o.jpg",
+      alt: "Wide lawn and palapa cottage beside the pool — Villa du Cacique garden and pool area, Casa de Campo",
+      caption: "Lawn & palapa"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142555390709000000-o.jpg",
+      alt: "Overhead aerial showing property layout, pool, palapa and sculpted gardens — Villa du Cacique estate plan, Casa de Campo",
+      caption: "Aerial plan view"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142828655430000000-o.jpg",
+      alt: "Infinity-style pool and sun loungers overlooking tropical landscaping — Villa du Cacique pool deck, Casa de Campo",
+      caption: "Pool & loungers"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142845810788000000-o.jpg",
+      alt: "Sun loungers at pool edge with umbrella and garden vista at sunset — Villa du Cacique, Casa de Campo",
+      caption: "Pool at sunset"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142902719737000000-o.jpg",
+      alt: "Covered palapa lounge with built-in seating and tropical views — Villa du Cacique outdoor pavilion, Casa de Campo",
+      caption: "Palapa lounge"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142920482935000000-o.jpg",
+      alt: "Pool and thatched palapa with adjacent dining terrace and lawn — Villa du Cacique exterior living, Casa de Campo",
+      caption: "Pool & dining"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142938155628000000-o.jpg",
+      alt: "Garden-facing exterior of the villa with pool and lush landscaping — Villa du Cacique, Casa de Campo",
+      caption: "Garden facade"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142514550592000000-o.jpg",
+      alt: "Aerial view of the nearby Casa de Campo golf course and coastline adjacent to the property.",
+      caption: "Nearby golf course"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143123038984000000-o.jpg",
+      alt: "Ivy-covered front façade and symmetrical entrance with formal landscaping — Villa du Cacique exterior, Casa de Campo",
+      caption: "Entrance façade"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143109348045000000-o.jpg",
+      alt: "Straight driveway and manicured hedges leading to the villa entrance — Villa du Cacique, Casa de Campo",
+      caption: "Driveway & hedges"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142650999140000000-o.jpg",
+      alt: "Private home theater with reclining seats and projection screen — Villa du Cacique amenities, Casa de Campo",
+      caption: "Home theater"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142612315857000000-o.jpg",
+      alt: "Guest bedroom with emerald accent walls, classic furnishings and garden access — Villa du Cacique bedroom, Casa de Campo",
+      caption: "Guest bedroom"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142627505951000000-o.jpg",
+      alt: "Guest bathroom with marble vanity and walk-in shower — Villa du Cacique bath, Casa de Campo",
+      caption: "Guest bathroom"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142642531749000000-o.jpg",
+      alt: "Bright bedroom with patio door to the garden and natural daylight — Villa du Cacique bedroom, Casa de Campo",
+      caption: "Bright bedroom"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142723235078000000-o.jpg",
+      alt: "Master bedroom with four-poster style bed and multiple balcony/door accesses — Villa du Cacique master suite, Casa de Campo",
+      caption: "Master suite"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142740424130000000-o.jpg",
+      alt: "Walk-in shower with glass screen and circular porthole window — Villa du Cacique bathroom, Casa de Campo",
+      caption: "Walk-in shower"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142757301402000000-o.jpg",
+      alt: "Built-in children's bunk room with custom cabinetry — family accommodation at Villa du Cacique, Casa de Campo",
+      caption: "Bunk room"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017142953069338000000-o.jpg",
+      alt: "Sitting room with tufted teal sofas, rustic coffee table and mezzanine balcony — Villa du Cacique interior, Casa de Campo",
+      caption: "Sitting room"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143009999431000000-o.jpg",
+      alt: "Grand sitting area with chandelier and symmetrical seating — Villa du Cacique salon, Casa de Campo",
+      caption: "Grand salon"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143100597864000000-o.jpg",
+      alt: "Formal dining room set for a long table with chandeliers and garden access — Villa du Cacique dining room, Casa de Campo",
+      caption: "Formal dining"
+    },
+    {
+      src: "https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143131260213000000-o.jpg",
+      alt: "Gourmet kitchen with blue cabinetry, central island and high-end appliances — Villa du Cacique kitchen, Casa de Campo",
+      caption: "Gourmet kitchen"
+    }
+  ];
 
   // Verified property specifications
   const propertySpecs = {
@@ -253,15 +401,13 @@ const Index = () => {
         mapEmbedUrl=""
       />
 
-      {/* Sam's Professional Contact Section */}
-      <SamContactSection />
-
-      {/* Contact Section */}
+      {/* Meet Your Specialist & Schedule Your Tour */}
       <div role="region" aria-label="Contact and scheduling">
-        <ContactGatedFlow
+        <MergedContactSection
           calendlyEmbedUrl=""
           contactFormFields={contactFormFields}
           onContactSubmit={handleContactSubmit}
+          onBrochureDownload={handleBrochureDownload}
         />
       </div>
 

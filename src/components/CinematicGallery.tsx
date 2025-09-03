@@ -49,9 +49,18 @@ const CinematicGallery: React.FC<CinematicGalleryProps> = ({ images }) => {
           <h2 className="text-5xl md:text-6xl font-bold mb-6" style={{ color: '#121212' }}>
             Villa Du Cacique Gallery
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Explore every exquisite detail of this architectural masterpiece through our curated collection of luxury imagery
           </p>
+          
+          {/* Virtual Tour Button */}
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('openVirtualTour'))}
+            className="px-8 py-4 text-lg font-semibold text-white rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 mb-8"
+            style={{ background: 'linear-gradient(135deg, #b19762, #a08856)' }}
+          >
+            📍 Experience Virtual Tour
+          </button>
         </div>
 
         {/* Cinematic Grid Layout */}

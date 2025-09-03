@@ -169,9 +169,16 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
               </div>
 
               <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(177, 151, 98, 0.1)' }}>
-                <p className="text-sm" style={{ color: '#6b6b6b' }}>
-                  <strong>Income Note:</strong> If using rental income to offset mortgage, gross monthly income can reach ≈ $41,667 USD (historically proven), covering the majority of ownership costs.
-                </p>
+                <div className="text-center">
+                  <div className="text-lg font-semibold mb-2" style={{ color: '#121212' }}>
+                    Smart Investment vs. Full Cash Purchase
+                  </div>
+                  <p className="text-sm" style={{ color: '#6b6b6b' }}>
+                    <strong>Monthly Rental Income: $41,667</strong><br />
+                    Monthly Investment: $57,418 (covers ownership costs)<br />
+                    <em>Add personal financing benefits and tax advantages for complete ROI picture</em>
+                  </p>
+                </div>
               </div>
 
               <div className="space-y-3">
@@ -181,7 +188,7 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
                   style={{ color: '#b19762', borderColor: '#b19762' }}
                 >
                   <FileText size={18} />
-                  Download Financing Guide PDF
+                  Download Smart Investment Guide
                 </button>
                 
                 <button
@@ -190,7 +197,7 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
                   style={{ background: 'linear-gradient(180deg, #b19762, #a08856)' }}
                 >
                   <DollarSign size={18} />
-                  Request Personalized Worksheet
+                  Get Your Personalized Analysis
                 </button>
               </div>
             </div>

@@ -17,7 +17,19 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
+              <img
+                src="/Exell_DreamEstate_logo.webp"
+                alt="Exell Dream Estate Logo"
+                className="w-12 h-12 object-contain"
+                onError={(e) => {
+                  // Fallback to text logo if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center" style={{ display: 'none' }}>
                 <span className="text-accent-foreground font-bold text-xl">E</span>
               </div>
               <div>
@@ -112,9 +124,21 @@ const Footer: React.FC = () => {
               </div>
             </div>
 
-            {/* Sam's Photo Placeholder */}
+            {/* Sam's Photo */}
             <div className="mt-6 p-4 bg-background/10 rounded-lg">
-              <div className="w-16 h-16 bg-accent/20 rounded-full mb-3 flex items-center justify-content center">
+              <img
+                src="/SamVekemans.webp"
+                alt="Sam Vekemans - Luxury Real Estate Specialist"
+                className="w-16 h-16 rounded-full mb-3 object-cover"
+                onError={(e) => {
+                  // Fallback to initials if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div className="w-16 h-16 bg-accent/20 rounded-full mb-3 flex items-center justify-center" style={{ display: 'none' }}>
                 <span className="text-accent text-xl font-bold">SV</span>
               </div>
               <p className="text-background/70 text-sm">

@@ -59,15 +59,7 @@ const SamContactSection: React.FC = () => {
                   </div>
 
                   <div className="space-y-3 text-left">
-                    <div className="flex items-center gap-3 p-3 bg-white/50 rounded-xl">
-                      <MapPin size={20} style={{ color: '#b19762' }} />
-                      <span className="text-sm font-medium">Casa de Campo Specialist</span>
-                    </div>
                     
-                    <div className="flex items-center gap-3 p-3 bg-white/50 rounded-xl">
-                      <Award size={20} style={{ color: '#b19762' }} />
-                      <span className="text-sm font-medium">$50M+ in Luxury Sales</span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -141,7 +133,6 @@ const SamContactSection: React.FC = () => {
                       Expertise & Specializations:
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li>• Casa de Campo luxury properties</li>
                       <li>• International buyer representation</li>
                       <li>• Investment property analysis</li>
                       <li>• Discreet off-market transactions</li>
@@ -164,17 +155,6 @@ const SamContactSection: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Testimonial or Trust Badge */}
-          <div className="text-center mt-12">
-            <blockquote className="text-lg italic text-muted-foreground max-w-2xl mx-auto">
-              "Sam's expertise in Casa de Campo luxury properties is unmatched. His attention to detail and 
-              commitment to client privacy makes him the preferred choice for discerning international buyers."
-            </blockquote>
-            <p className="mt-4 font-medium" style={{ color: '#b19762' }}>
-              — Verified Client Review
-            </p>
           </div>
         </div>
       </div>

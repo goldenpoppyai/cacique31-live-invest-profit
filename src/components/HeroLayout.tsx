@@ -105,7 +105,7 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
             <span className="text-3xl md:text-5xl lg:text-6xl text-gold-400">
               Tailored financing and premium rental <br />
               meets luxury living in Caribbean's <br />
-              most orestigious address. <br />
+              most prestigious address. <br />
               Enjoy the Villa, not the bills. 
             </span>
           </h1>

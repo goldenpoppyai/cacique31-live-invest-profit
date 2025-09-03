@@ -101,23 +101,37 @@ const MergedContactSection: React.FC<MergedContactSectionProps> = ({
                   </p>
 
                   {/* Credentials & Expertise */}
+                   <div className="space-y-3 mb-6">
+                    <div className="flex items-center gap-2">
+                      <Star size={16} style={{ color: '#b19762' }} />
+                      <span className="text-sm" style={{ color: '#6b6b6b' }}>
+                        Personalized white-glove service
+                      </span>
+                    </div>
+                     <div className="space-y-3 mb-6">
+                    <div className="flex items-center gap-2">
+                      <Star size={16} style={{ color: '#b19762' }} />
+                      <span className="text-sm" style={{ color: '#6b6b6b' }}>
+                        International buyer representation
+                      </span>
+                    </div>
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2">
                       <Star size={16} style={{ color: '#b19762' }} />
                       <span className="text-sm" style={{ color: '#6b6b6b' }}>
-                        Specialist in exclusive Casa de Campo properties
+                        Property management coordination
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Star size={16} style={{ color: '#b19762' }} />
                       <span className="text-sm" style={{ color: '#6b6b6b' }}>
-                        Expert in luxury villa financing and investment analysis
+                        Investment property analysis
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Star size={16} style={{ color: '#b19762' }} />
                       <span className="text-sm" style={{ color: '#6b6b6b' }}>
-                        Personalized white-glove service for discerning clients
+                        Discreet off-market transactions for discerning clients 
                       </span>
                     </div>
                   </div>
@@ -288,16 +302,6 @@ const MergedContactSection: React.FC<MergedContactSectionProps> = ({
                     Secure Your Private Viewing
                   </Button>
                   
-                  <Button
-                    type="button"
-                    onClick={onBrochureDownload}
-                    variant="outline"
-                    className="w-full"
-                    style={{ borderColor: '#b19762', color: '#b19762' }}
-                  >
-                    <Download className="w-4 h-4 mr-2" />
-                    Download Brochure
-                  </Button>
                 </div>
               </form>
             </div>

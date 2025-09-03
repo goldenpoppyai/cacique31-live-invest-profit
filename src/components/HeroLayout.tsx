@@ -100,9 +100,13 @@ const HeroLayout: React.FC<HeroLayoutProps> = ({
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <div className="text-center max-w-4xl mx-auto px-6">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl mb-6 leading-tight">
-            Are you looking for your own piece of paradise?<br />
+            Villa du Cacique<br />
+            Own the Dream. Without the Cost.<br />
             <span className="text-3xl md:text-5xl lg:text-6xl text-gold-400">
-              Let's turn your dream into reality, for free!
+              Tailored financing and premium rental <br />
+              meets luxury living in Caribbean's <br />
+              most orestigious address. <br />
+              Enjoy the Villa, not the bills. 
             </span>
           </h1>
 

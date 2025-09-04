@@ -233,7 +233,7 @@ const Index = () => {
   };
 
   // Property story (verbatim from docs)
-  const propertyStory = "Live like an icon at the gorgeous Villa Du Cacique. Considered Casa De Campos MOST appreciated architecturally designed villa, is a bright, beautiful mansion located on Casa De Campo Millionaires row and is a lovely private location. Home to the former owner of Forbes Magazine Latin American and Latin Media Icon; this seven-bedroom, 8.5 bath, is immaculately designed, with incredible attention to detail. The luminous, generously proportioned interiors are simply unmatched at Casa De Campo. The villa sits on Teeth of the Dog hole #1, awarded the best golf course in the Americas, and with partial views of the Caribbean ocean, palatial style French gardens; there is enough chance of scenery to keep you from switching back to work mode.";
+  const propertyStory = "Live like an icon at the gorgeous Villa Du Cacique. Considered Casa De Campos MOST appreciated architecturally designed villa, is a bright, beautiful mansion located on Casa de Campo Millionaires row and is a lovely private location. Home to the former owner of Forbes Magazine Latin American and Latin Media Icon; this seven-bedroom, 8.5 bath, is immaculately designed, with incredible attention to detail. The luminous, generously proportioned interiors are simply unmatched at Casa de Campo. The villa sits on Teeth of the Dog hole #1, awarded the best golf course in the Americas, and with partial views of the Caribbean ocean, palatial style French gardens; there is enough chance of scenery to keep you from switching back to work mode.";
 
   // Investment highlights
   const investmentHighlights = [
@@ -328,12 +328,19 @@ const Index = () => {
     setShowVirtualTour(true);
   };
 
+  // Use Vite's BASE_URL so assets work on root OR when deployed to a subfolder (e.g. /villaducacique/)
+  const rawBase = (import.meta.env as any).BASE_URL || '/';
+  // ensure trailing slash
+  const baseUrl = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
   const handleROIDownload = () => {
-    window.open('/Exell_ROI.pdf', '_blank');
+    // Opens the ROI PDF relative to the app base (works in Lovable preview and subfolder deploys)
+    window.open(`${baseUrl}Exell_ROI.pdf`, '_blank');
   };
 
   const handleFinancingDownload = () => {
-    window.open('/Exell_Financing.pdf', '_blank');
+    // Opens the Financing PDF relative to the app base (works in Lovable preview and subfolder deploys)
+    window.open(`${baseUrl}Exell_Financing.pdf`, '_blank');
   };
 
   const handlePersonalizedWorksheet = () => {

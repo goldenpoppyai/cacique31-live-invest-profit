@@ -16,8 +16,8 @@ const Header: React.FC = () => {
           {/* Logo & Brand */}
           <div className="flex items-center gap-4">
             <img
-              src="/Exell_DreamEstate_logo.webp"
-              alt="Exell Dream Estate Logo"
+              src="/Exell_DreamEstate_favicon.webp"
+              alt="Exell Dream Estate Favicon"
               className="w-12 h-12 object-contain"
               onError={(e) => {
                 // Fallback to text logo if image fails to load

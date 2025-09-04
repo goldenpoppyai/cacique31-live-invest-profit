@@ -139,6 +139,34 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
                 <h4 className="font-semibold mb-4" style={{ color: '#121212' }}>
                   Sample Financing Scenario
                 </h4>
+                
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr style={{ backgroundColor: '#f6f5f4' }}>
+                        <th className="text-left p-3 rounded-l-lg" style={{ color: '#121212' }}>
+                          Cost Item
+                        </th>
+                        <th className="text-right p-3 rounded-r-lg" style={{ color: '#121212' }}>
+                          Monthly USD
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {financingCosts.map((cost, index) => (
+                        <tr key={index} className="border-b border-gray-100">
+                          <td className="p-3" style={{ color: '#6b6b6b' }}>
+                            {cost.item}
+                          </td>
+                          <td className="p-3 text-right font-medium" style={{ color: '#121212' }}>
+                            {cost.monthlyUSD}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
 
               <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(177, 151, 98, 0.1)' }}>
                 <div className="text-center">

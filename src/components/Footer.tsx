@@ -18,9 +18,9 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-4 mb-6">
               <img
-                src="/Exell_DreamEstate_logo.webp"
+                src="/ExellDreamEstate_logo_whiteBG.webp"
                 alt="Exell Dream Estate Logo"
-                className="w-12 h-12 object-contain"
+                className="w-12 h-12 object-contain bg-white rounded-lg p-1"
                 onError={(e) => {
                   // Fallback to text logo if image fails to load
                   const target = e.target as HTMLImageElement;

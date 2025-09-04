@@ -1,113 +1,202 @@
 /**
  * NeighborhoodMapModule Component
  * 
- * Luxury neighborhood showcase with static "Your 5-Minute Life" column
- * and updated MapBox integration (property + nearby amenities).
+ * Production-ready Mapbox map for Villa du Cacique 31 and nearby POIs
+ * with dynamic loading and proper error handling
  */
 
 import React, { useState, useEffect } from 'react';
-import { MapPin, Clock } from 'lucide-react';
+import { MapPin, Clock, AlertCircle } from 'lucide-react';
 
 const NeighborhoodMapModule: React.FC = () => {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (!document.querySelector('script[src*="mapbox-gl"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js';
-      script.async = true;
-      document.head.appendChild(script);
+    // Check if mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
 
-      const link = document.createElement('link');
-      link.href = 'https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css';
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
+    // Auto-init on desktop
+    if (!isMobile) {
+      loadMapboxLibrary();
     }
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const loadMap = () => {
-    setIsMapLoaded(true);
+  const loadMapboxLibrary = async () => {
+    try {
+      // Dynamic import for code splitting
+      const mapboxgl = await import('mapbox-gl');
+      
+      // Add CSS if not present
+      if (!document.querySelector('link[href*="mapbox-gl.css"]')) {
+        const link = document.createElement('link');
+        link.href = 'https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
 
-    setTimeout(() => {
-      const mapboxgl = (window as any).mapboxgl;
-      if (mapboxgl && document.getElementById('mapbox-container')) {
-        mapboxgl.accessToken = 'sk.eyJ1IjoiZ29sZGVucG9wcHkiLCJhIjoiY21mM3dwOTd3MDE0czJxczZvNnE1aGtmdSJ9.KgOJSJQPLIEhZ6IauVVKUA';
+      initializeMap(mapboxgl.default);
+    } catch (error) {
+      console.error('Failed to load Mapbox GL JS:', error);
+      setMapError('Failed to load map library');
+      setShowFallback(true);
+    }
+  };
 
-        const map = new mapboxgl.Map({
-          container: 'mapbox-container',
-          style: 'mapbox://styles/mapbox/light-v11',
-          center: [-68.9195, 18.4294], // Center between Villa and Airport
-          zoom: 11,
-          pitch: 45,
+  const initializeMap = (mapboxgl: any) => {
+    try {
+      // Read token from environment variable
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
+      
+      if (!mapboxToken) {
+        console.warn('Mapbox token not found in environment variables');
+        setShowFallback(true);
+        return;
+      }
+
+      if (!document.getElementById('mapbox-container')) {
+        console.error('Map container not found');
+        return;
+      }
+
+      mapboxgl.accessToken = mapboxToken;
+
+      const map = new mapboxgl.Map({
+        container: 'mapbox-container',
+        style: 'mapbox://styles/mapbox/satellite-streets-v12',
+        center: [-68.4565, 18.4206], // Villa Du Cacique 31 center
+        zoom: 12,
+        pitch: 45,
+        bearing: -17,
+        antialias: true
+      });
+
+      // POI locations with exact coordinates
+      const locations = [
+        {
+          coords: [-68.4565, 18.4206],
+          title: 'Villa Du Cacique 31',
+          desc: 'Av. El Cacique, La Romana 22000, Dominican Republic<br><em>Your luxury estate with golf course frontage</em>',
+          color: '#b19762',
+          type: 'property'
+        },
+        {
+          coords: [-68.9120, 18.4507],
+          title: 'La Romana International Airport (LRM)',
+          desc: 'Carr. La Romana - Higuey 5.5, La Romana 22000<br><em>Private & commercial connections • 15 minutes</em>',
+          color: '#ef4444',
+          type: 'airport'
+        },
+        {
+          coords: [-68.8875, 18.4210],
+          title: 'Teeth of the Dog Golf Course',
+          desc: 'Casa de Campo Resort & Villas, C368+V92, La Romana 22000<br><em>Caribbean\'s #1 rated golf course • On property</em>',
+          color: '#22c55e',
+          type: 'golf'
+        },
+        {
+          coords: [-68.8895, 18.4165],
+          title: 'Casa de Campo Equestrian Center',
+          desc: 'C399+632, La Romana 22000<br><em>World-class polo & equestrian facilities • 5 minutes</em>',
+          color: '#3b82f6',
+          type: 'recreation'
+        },
+        {
+          coords: [-68.8845, 18.4185],
+          title: 'Casa de Campo Racquet Center',
+          desc: 'C3CJ+662, La Romana 22000<br><em>Professional tennis facilities • 3 minutes</em>',
+          color: '#3b82f6',
+          type: 'recreation'
+        },
+        {
+          coords: [-68.8830, 18.4180],
+          title: 'Casa de Campo Marina',
+          desc: '22000 La Romana, Dominican Republic<br><em>Full-service marina & fine dining • 8 minutes</em>',
+          color: '#f59e0b',
+          type: 'marina'
+        },
+        {
+          coords: [-68.8890, 18.4150],
+          title: 'Minitas Beach Club & Restaurant',
+          desc: 'C33J+99V, La Romana 22000<br><em>Exclusive beachfront dining • 10 minutes</em>',
+          color: '#f59e0b',
+          type: 'dining'
+        }
+      ];
+
+      map.on('load', () => {
+        setIsMapLoaded(true);
+        
+        // Add 3D terrain and buildings
+        map.addSource('mapbox-dem', {
+          type: 'raster-dem',
+          url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+          tileSize: 512,
+          maxzoom: 14
         });
+        map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
 
-        // Premium Property & Luxury Amenities
-        const locations = [
-          {
-            coords: [-68.9195, 18.4294],
-            title: 'Villa Du Cacique 31',
-            desc: 'Av. El Cacique, La Romana 22000, Dominican Republic<br><em>Your luxury estate with golf course frontage</em>',
-            color: '#b19762', // Gold for main property
-          },
-          {
-            coords: [-68.9120, 18.4507],
-            title: 'La Romana International Airport',
-            desc: 'Carr. La Romana - Higuey 5.5, La Romana 22000<br><em>Private & commercial connections • 15 minutes</em>',
-            color: '#4CAF50', // Green for transportation
-          },
-          {
-            coords: [-68.9156, 18.4247],
-            title: 'Teeth of the Dog Golf Course',
-            desc: 'Casa de Campo Resort & Villas, La Romana 22000<br><em>Caribbean\'s #1 rated golf course • On property</em>',
-            color: '#2196F3', // Blue for recreation
-          },
-          {
-            coords: [-68.9178, 18.4285],
-            title: 'Casa de Campo Equestrian Center',
-            desc: 'Casa de Campo, La Romana 22000<br><em>World-class polo & equestrian facilities • 5 minutes</em>',
-            color: '#2196F3', // Blue for recreation
-          },
-          {
-            coords: [-68.9165, 18.4295],
-            title: 'Casa de Campo Racquet Center',
-            desc: 'Casa de Campo, La Romana 22000<br><em>Professional tennis facilities • 3 minutes</em>',
-            color: '#2196F3', // Blue for recreation
-          },
-          {
-            coords: [-68.9145, 18.4275],
-            title: 'Casa de Campo Marina',
-            desc: 'La Romana 22000, Dominican Republic<br><em>Full-service marina & fine dining • 8 minutes</em>',
-            color: '#FF9800', // Orange for dining/leisure
-          },
-          {
-            coords: [-68.9135, 18.4255],
-            title: 'Minitas Beach Club & Restaurant',
-            desc: 'Casa de Campo, La Romana 22000<br><em>Exclusive beachfront dining • 10 minutes</em>',
-            color: '#FF9800', // Orange for dining/leisure
-          },
-        ];
-
-        locations.forEach((loc) => {
-          new mapboxgl.Marker({ color: loc.color || '#b19762' })
-            .setLngLat(loc.coords)
+        // Add markers with popups
+        locations.forEach((location) => {
+          const marker = new mapboxgl.Marker({ 
+            color: location.color,
+            scale: location.type === 'property' ? 1.2 : 0.9
+          })
+            .setLngLat(location.coords)
             .setPopup(
               new mapboxgl.Popup({ 
                 closeButton: true,
                 closeOnClick: false,
-                className: 'luxury-popup'
+                className: 'luxury-popup',
+                maxWidth: '300px'
               }).setHTML(
-                `<div style="font-family: 'Inter', sans-serif; max-width: 280px;">
-                  <h3 style="color: #121212; font-size: 16px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3;">${loc.title}</h3>
-                  <p style="color: #6b6b6b; font-size: 13px; margin: 0; line-height: 1.4;">${loc.desc}</p>
+                `<div style="font-family: 'Inter', sans-serif; padding: 4px;">
+                  <h3 style="color: #121212; font-size: 16px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3;">${location.title}</h3>
+                  <p style="color: #6b6b6b; font-size: 13px; margin: 0; line-height: 1.4;">${location.desc}</p>
                 </div>`
               )
             )
             .addTo(map);
+
+          // Add accessibility labels
+          marker.getElement().setAttribute('aria-label', location.title);
+          marker.getElement().setAttribute('role', 'button');
+          marker.getElement().setAttribute('tabindex', '0');
         });
 
-        map.addControl(new mapboxgl.NavigationControl());
-      }
-    }, 200);
+        // Add navigation controls
+        map.addControl(new mapboxgl.NavigationControl({
+          visualizePitch: true
+        }), 'top-right');
+
+        // Add fullscreen control
+        map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+      });
+
+      map.on('error', (e) => {
+        console.error('Map error:', e);
+        setMapError('Map failed to load properly');
+      });
+
+    } catch (error) {
+      console.error('Map initialization error:', error);
+      setMapError('Failed to initialize map');
+      setShowFallback(true);
+    }
+  };
+
+  const handleMapClick = () => {
+    if (isMobile && !isMapLoaded) {
+      loadMapboxLibrary();
+    }
   };
 
   return (
@@ -185,23 +274,70 @@ const NeighborhoodMapModule: React.FC = () => {
             <h3 className="text-2xl font-semibold mb-4" style={{ color: '#121212' }}>
               Property Location
             </h3>
-            {!isMapLoaded ? (
+            
+            {showFallback ? (
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 border-2 border-dashed border-gray-300">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center space-y-3 p-6">
+                    <AlertCircle size={48} style={{ color: '#f59e0b' }} className="mx-auto" />
+                    <p className="font-medium text-[#121212]">Map Unavailable</p>
+                    <p className="text-sm text-[#6b6b6b] max-w-xs">
+                      {mapError || 'Please set VITE_MAPBOX_TOKEN in your .env file to view the interactive map'}
+                    </p>
+                    <p className="text-xs text-[#6b6b6b]">
+                      Get your free token at <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-[#b19762] hover:underline">mapbox.com</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : !isMapLoaded ? (
               <div
-                className="relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                style={{ backgroundColor: '#ffffff' }}
-                onClick={loadMap}
+                className="relative aspect-[4/3] rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity bg-white shadow-lg"
+                onClick={handleMapClick}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center space-y-3">
                     <MapPin size={48} style={{ color: '#b19762' }} className="mx-auto" />
-                    <p className="font-medium text-[#121212]">Click to load interactive map</p>
-                    <p className="text-sm text-[#6b6b6b]">Explore Casa de Campo</p>
+                    <p className="font-medium text-[#121212]">
+                      {isMobile ? 'Tap to load interactive map' : 'Loading interactive map...'}
+                    </p>
+                    <p className="text-sm text-[#6b6b6b]">Explore Casa de Campo & Villa Du Cacique</p>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
                 <div id="mapbox-container" className="w-full h-full"></div>
+                
+                {/* Map Legend */}
+                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg max-w-xs">
+                  <div className="flex items-center gap-2 mb-2">
+                    <MapPin size={16} style={{ color: '#b19762' }} />
+                    <span className="text-sm font-medium text-[#121212]">Legend</span>
+                  </div>
+                  <div className="space-y-1 text-xs text-[#6b6b6b]">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#b19762' }}></div>
+                      <span>Villa Du Cacique 31</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#22c55e' }}></div>
+                      <span>Golf Course</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+                      <span>Recreation</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#f59e0b' }}></div>
+                      <span>Dining & Marina</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#ef4444' }}></div>
+                      <span>Airport</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>

@@ -31,62 +31,75 @@ const NeighborhoodMapModule: React.FC = () => {
     setTimeout(() => {
       const mapboxgl = (window as any).mapboxgl;
       if (mapboxgl && document.getElementById('mapbox-container')) {
-        mapboxgl.accessToken =
-          'sk.eyJ1IjoiZ29sZGVucG9wcHkiLCJhIjoiY21mM3dwOTd3MDE0czJxczZvNnE1aGtmdSJ9.KgOJSJQPLIEhZ6IauVVKUA';
+        mapboxgl.accessToken = 'sk.eyJ1IjoiZ29sZGVucG9wcHkiLCJhIjoiY21mM3dwOTd3MDE0czJxczZvNnE1aGtmdSJ9.KgOJSJQPLIEhZ6IauVVKUA';
 
         const map = new mapboxgl.Map({
           container: 'mapbox-container',
           style: 'mapbox://styles/mapbox/light-v11',
-          center: [-68.4565, 18.4206], // Casa de Campo
-          zoom: 13,
+          center: [-68.9195, 18.4294], // Center between Villa and Airport
+          zoom: 11,
           pitch: 45,
         });
 
-        // POIs
+        // Premium Property & Luxury Amenities
         const locations = [
           {
-            coords: [-68.4565, 18.4206],
+            coords: [-68.9195, 18.4294],
             title: 'Villa Du Cacique 31',
-            desc: 'Av. El Cacique, Casa de Campo',
+            desc: 'Av. El Cacique, La Romana 22000, Dominican Republic<br><em>Your luxury estate with golf course frontage</em>',
+            color: '#b19762', // Gold for main property
           },
           {
             coords: [-68.9120, 18.4507],
-            title: 'La Romana International Airport (LRM)',
-            desc: 'Private & commercial connections, 25–30 min',
+            title: 'La Romana International Airport',
+            desc: 'Carr. La Romana - Higuey 5.5, La Romana 22000<br><em>Private & commercial connections • 15 minutes</em>',
+            color: '#4CAF50', // Green for transportation
           },
           {
-            coords: [-68.8875, 18.4210],
+            coords: [-68.9156, 18.4247],
             title: 'Teeth of the Dog Golf Course',
-            desc: 'Award-winning oceanfront golf course',
+            desc: 'Casa de Campo Resort & Villas, La Romana 22000<br><em>Caribbean\'s #1 rated golf course • On property</em>',
+            color: '#2196F3', // Blue for recreation
           },
           {
-            coords: [-68.8895, 18.4165],
+            coords: [-68.9178, 18.4285],
             title: 'Casa de Campo Equestrian Center',
-            desc: 'Equestrian facilities & polo',
+            desc: 'Casa de Campo, La Romana 22000<br><em>World-class polo & equestrian facilities • 5 minutes</em>',
+            color: '#2196F3', // Blue for recreation
           },
           {
-            coords: [-68.8845, 18.4185],
+            coords: [-68.9165, 18.4295],
             title: 'Casa de Campo Racquet Center',
-            desc: 'World-class tennis facilities',
+            desc: 'Casa de Campo, La Romana 22000<br><em>Professional tennis facilities • 3 minutes</em>',
+            color: '#2196F3', // Blue for recreation
           },
           {
-            coords: [-68.8830, 18.4180],
+            coords: [-68.9145, 18.4275],
             title: 'Casa de Campo Marina',
-            desc: 'Full-service private berths & dining',
+            desc: 'La Romana 22000, Dominican Republic<br><em>Full-service marina & fine dining • 8 minutes</em>',
+            color: '#FF9800', // Orange for dining/leisure
           },
           {
-            coords: [-68.8890, 18.4150],
+            coords: [-68.9135, 18.4255],
             title: 'Minitas Beach Club & Restaurant',
-            desc: 'Exclusive beach & fine dining',
+            desc: 'Casa de Campo, La Romana 22000<br><em>Exclusive beachfront dining • 10 minutes</em>',
+            color: '#FF9800', // Orange for dining/leisure
           },
         ];
 
         locations.forEach((loc) => {
-          new mapboxgl.Marker({ color: '#b19762' })
+          new mapboxgl.Marker({ color: loc.color || '#b19762' })
             .setLngLat(loc.coords)
             .setPopup(
-              new mapboxgl.Popup().setHTML(
-                `<h3>${loc.title}</h3><p>${loc.desc}</p>`
+              new mapboxgl.Popup({ 
+                closeButton: true,
+                closeOnClick: false,
+                className: 'luxury-popup'
+              }).setHTML(
+                `<div style="font-family: 'Inter', sans-serif; max-width: 280px;">
+                  <h3 style="color: #121212; font-size: 16px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3;">${loc.title}</h3>
+                  <p style="color: #6b6b6b; font-size: 13px; margin: 0; line-height: 1.4;">${loc.desc}</p>
+                </div>`
               )
             )
             .addTo(map);

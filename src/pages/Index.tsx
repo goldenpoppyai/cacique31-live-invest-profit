@@ -396,10 +396,7 @@ const Index = () => {
       </div>
 
       {/* Location & Interactive Map */}
-      <NeighborhoodMapModule
-        pointsOfInterest={pointsOfInterest}
-        mapEmbedUrl=""
-      />
+      <NeighborhoodMapModule />
 
       {/* Meet Your Specialist & Schedule Your Tour */}
       <div role="region" aria-label="Contact and scheduling">

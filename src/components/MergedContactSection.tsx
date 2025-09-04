@@ -101,21 +101,19 @@ const MergedContactSection: React.FC<MergedContactSectionProps> = ({
                   </p>
 
                   {/* Credentials & Expertise */}
-                   <div className="space-y-3 mb-6">
+                  <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2">
                       <Star size={16} style={{ color: '#b19762' }} />
                       <span className="text-sm" style={{ color: '#6b6b6b' }}>
                         Personalized white-glove service
                       </span>
                     </div>
-                     <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2">
                       <Star size={16} style={{ color: '#b19762' }} />
                       <span className="text-sm" style={{ color: '#6b6b6b' }}>
                         International buyer representation
                       </span>
                     </div>
-                  <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2">
                       <Star size={16} style={{ color: '#b19762' }} />
                       <span className="text-sm" style={{ color: '#6b6b6b' }}>

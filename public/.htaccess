@@ -1,9 +1,15 @@
 <IfModule mod_expires.c>
   ExpiresActive On
+
+  # Image formats
   ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/* "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType image/*   "access plus 1 year"
+
+  # Stylesheets and JS
+  ExpiresByType text/css               "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
+
+  # PDFs
   ExpiresByType application/pdf "access plus 1 month"
 </IfModule>
 
@@ -14,4 +20,12 @@
   <FilesMatch "\.(pdf)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /villaducacique/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /villaducacique/index.html [L]
 </IfModule>

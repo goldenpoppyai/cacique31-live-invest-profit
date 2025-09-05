@@ -50,10 +50,10 @@ const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
             muted
             aria-label="Villa Du Cacique virtual tour"
           >
-            <source src="/Virtual Tour_IG_01 (compressed).mp4" type="video/mp4" />
+            <source src="/Virtual Tour.mp4" type="video/mp4" />
             <p className="text-center p-8 text-white">
               Your browser does not support the video tag. 
-              <a href="/Virtual Tour_IG_01 (compressed).mp4" className="underline">
+              <a href="/Virtual Tour.mp4" className="underline">
                 Download the video here
               </a>.
             </p>

@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
           {/* Contact Information */}
           <div>
             <h4 className="text-lg font-semibold text-background mb-4">
-              Contact Sam Vekemans
+              Contact Us
             </h4>
             
             <div className="space-y-4">
@@ -95,8 +95,7 @@ const Footer: React.FC = () => {
                 <MapPin size={18} className="text-accent mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-background/70">
-                    Casa de Campo, La Romana<br />
-                    Dominican Republic
+                    Dubai, United Arab Emirates
                   </p>
                 </div>
               </div>

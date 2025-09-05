@@ -108,7 +108,7 @@ const SamContactSection: React.FC = () => {
                       </a>
 
                       <a 
-                        href="https://www.linkedin.com/company/exell-dream-estate/"
+                        href="https://www.linkedin.com/in/sam-vekemans-exell"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-4 p-4 rounded-xl border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group"

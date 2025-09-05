@@ -72,59 +72,59 @@ const NeighborhoodMapModule: React.FC = () => {
       const map = new mapboxgl.Map({
         container: 'mapbox-container',
         style: 'mapbox://styles/mapbox/satellite-streets-v12',
-        center: [-68.4565, 18.4206], // Villa Du Cacique 31 center
+        center: [-68.5266, 18.4478], // Villa Du Cacique 31 center
         zoom: 12,
         pitch: 45,
         bearing: -17,
         antialias: true
       });
 
-      // POI locations with exact coordinates
+      // POI locations with exact coordinates  
       const locations = [
         {
-          coords: [-68.4565, 18.4206],
+          coords: [-68.5266, 18.4478],
           title: 'Villa Du Cacique 31',
           desc: 'Av. El Cacique, La Romana 22000, Dominican Republic<br><em>Your luxury estate with golf course frontage</em>',
           color: '#b19762',
           type: 'property'
         },
         {
-          coords: [-68.9120, 18.4507],
+          coords: [-68.3675, 18.4300],
           title: 'La Romana International Airport (LRM)',
           desc: 'Carr. La Romana - Higuey 5.5, La Romana 22000<br><em>Private & commercial connections • 15 minutes</em>',
           color: '#ef4444',
           type: 'airport'
         },
         {
-          coords: [-68.8875, 18.4210],
+          coords: [-68.5281, 18.4510],
           title: 'Teeth of the Dog Golf Course',
           desc: 'Casa de Campo Resort & Villas, C368+V92, La Romana 22000<br><em>Caribbean\'s #1 rated golf course • On property</em>',
           color: '#22c55e',
           type: 'golf'
         },
         {
-          coords: [-68.8895, 18.4165],
+          coords: [-68.5240, 18.4480],
           title: 'Casa de Campo Equestrian Center',
           desc: 'C399+632, La Romana 22000<br><em>World-class polo & equestrian facilities • 5 minutes</em>',
           color: '#3b82f6',
           type: 'recreation'
         },
         {
-          coords: [-68.8845, 18.4185],
+          coords: [-68.5270, 18.4500],
           title: 'Casa de Campo Racquet Center',
           desc: 'C3CJ+662, La Romana 22000<br><em>Professional tennis facilities • 3 minutes</em>',
           color: '#3b82f6',
           type: 'recreation'
         },
         {
-          coords: [-68.8830, 18.4180],
+          coords: [-68.5248, 18.4472],
           title: 'Casa de Campo Marina',
           desc: '22000 La Romana, Dominican Republic<br><em>Full-service marina & fine dining • 8 minutes</em>',
           color: '#f59e0b',
           type: 'marina'
         },
         {
-          coords: [-68.8890, 18.4150],
+          coords: [-68.5260, 18.4485],
           title: 'Minitas Beach Club & Restaurant',
           desc: 'C33J+99V, La Romana 22000<br><em>Exclusive beachfront dining • 10 minutes</em>',
           color: '#f59e0b',

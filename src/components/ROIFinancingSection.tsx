@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Download, TrendingUp, Calculator, DollarSign, FileText } from 'lucide-react';
+import { Download, TrendingUp, Shield, DollarSign, FileText, Zap, Trophy, Target, Users } from 'lucide-react';
 
 interface ROIMetrics {
   annualGrossIncome: string;
@@ -17,14 +17,16 @@ interface ROIMetrics {
   annualizedReturn: string;
 }
 
-interface FinancingCost {
-  item: string;
-  monthlyUSD: string;
+interface InvestmentBenefit {
+  title: string;
+  description: string;
+  value: string;
+  icon: string;
 }
 
 interface ROIFinancingSectionProps {
   roiMetrics: ROIMetrics;
-  financingCosts: FinancingCost[];
+  investmentBenefits: InvestmentBenefit[];
   onROIDownload: () => void;
   onFinancingDownload: () => void;
   onPersonalizedWorksheet: () => void;
@@ -32,7 +34,7 @@ interface ROIFinancingSectionProps {
 
 const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
   roiMetrics,
-  financingCosts,
+  investmentBenefits,
   onROIDownload,
   onFinancingDownload,
   onPersonalizedWorksheet
@@ -125,59 +127,90 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
             </div>
           </div>
 
-          {/* Financing Panel */}
+          {/* Strategic Investment Benefits Panel */}
           <div className="card-luxury p-8" style={{ backgroundColor: '#ffffff' }}>
             <div className="flex items-center gap-3 mb-6">
-              <Calculator size={32} style={{ color: '#b19762' }} />
+              <Shield size={32} style={{ color: '#b19762' }} />
               <h3 className="text-2xl font-semibold" style={{ color: '#121212' }}>
-                Financing Details
+                Strategic Investment Benefits
               </h3>
             </div>
 
             <div className="space-y-6">
-              <div>
-                <h4 className="font-semibold mb-4" style={{ color: '#121212' }}>
-                  Sample Financing Scenario
-                </h4>
-                
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr style={{ backgroundColor: '#f6f5f4' }}>
-                        <th className="text-left p-3 rounded-l-lg" style={{ color: '#121212' }}>
-                          Cost Item
-                        </th>
-                        <th className="text-right p-3 rounded-r-lg" style={{ color: '#121212' }}>
-                          Monthly USD
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {financingCosts.map((cost, index) => (
-                        <tr key={index} className="border-b border-gray-100">
-                          <td className="p-3" style={{ color: '#6b6b6b' }}>
-                            {cost.item}
-                          </td>
-                          <td className="p-3 text-right font-medium" style={{ color: '#121212' }}>
-                            {cost.monthlyUSD}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+              {/* Key Benefits Grid */}
+              <div className="grid grid-cols-1 gap-4">
+                {investmentBenefits.map((benefit, index) => {
+                  const getIcon = (iconName: string) => {
+                    switch(iconName) {
+                      case 'shield': return <Shield size={24} style={{ color: '#b19762' }} />;
+                      case 'zap': return <Zap size={24} style={{ color: '#b19762' }} />;
+                      case 'trophy': return <Trophy size={24} style={{ color: '#b19762' }} />;
+                      case 'target': return <Target size={24} style={{ color: '#b19762' }} />;
+                      case 'users': return <Users size={24} style={{ color: '#b19762' }} />;
+                      default: return <DollarSign size={24} style={{ color: '#b19762' }} />;
+                    }
+                  };
+
+                  return (
+                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg" style={{ backgroundColor: '#f6f5f4' }}>
+                      <div className="flex-shrink-0 mt-1">
+                        {getIcon(benefit.icon)}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-sm" style={{ color: '#121212' }}>
+                            {benefit.title}
+                          </h4>
+                          <div className="text-sm font-bold" style={{ color: '#b19762' }}>
+                            {benefit.value}
+                          </div>
+                        </div>
+                        <p className="text-xs" style={{ color: '#6b6b6b' }}>
+                          {benefit.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
+              {/* Smart Leverage Highlight */}
               <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(177, 151, 98, 0.1)' }}>
                 <div className="text-center">
                   <div className="text-lg font-semibold mb-2" style={{ color: '#121212' }}>
-                    Smart Investment vs. Full Cash Purchase
+                    Smart Leverage Strategy
                   </div>
                   <p className="text-sm" style={{ color: '#6b6b6b' }}>
-                    <strong>Monthly Rental Income: $41,667</strong><br />
-                    Monthly Investment: $57,418 (covers ownership costs)<br />
-                    <em>Add personal financing benefits and tax advantages for complete ROI picture</em>
+                    <strong>60% Financing Available</strong> • <strong>USD Denominated</strong><br />
+                    Preserve $2.8M liquidity for diversified investments<br />
+                    <em>Tax-deductible interest + inflation hedge benefits</em>
                   </p>
+                </div>
+              </div>
+
+              {/* Exclusive Investment Advantages */}
+              <div className="p-4 rounded-lg border-2" style={{ borderColor: '#b19762', backgroundColor: '#ffffff' }}>
+                <h4 className="font-semibold text-sm mb-3 flex items-center gap-2" style={{ color: '#121212' }}>
+                  <Trophy size={16} style={{ color: '#b19762' }} />
+                  Exclusive Investment Advantages
+                </h4>
+                <div className="grid grid-cols-1 gap-2 text-xs">
+                  <div className="flex justify-between">
+                    <span style={{ color: '#6b6b6b' }}>Casa de Campo Membership</span>
+                    <span className="font-medium" style={{ color: '#b19762' }}>$100K+ Value</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: '#6b6b6b' }}>Golf Course Frontage</span>
+                    <span className="font-medium" style={{ color: '#b19762' }}>Limited Supply</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: '#6b6b6b' }}>Professional Management</span>
+                    <span className="font-medium" style={{ color: '#b19762' }}>Hands-Off</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: '#6b6b6b' }}>Estate Planning Benefits</span>
+                    <span className="font-medium" style={{ color: '#b19762' }}>Legacy Asset</span>
+                  </div>
                 </div>
               </div>
 
@@ -188,7 +221,7 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
                   style={{ color: '#b19762', borderColor: '#b19762' }}
                 >
                   <FileText size={18} />
-                  Download Smart Investment Guide
+                  Download Investment Strategy Guide
                 </button>
                 
                 <button
@@ -197,7 +230,7 @@ const ROIFinancingSection: React.FC<ROIFinancingSectionProps> = ({
                   style={{ background: 'linear-gradient(180deg, #b19762, #a08856)' }}
                 >
                   <DollarSign size={18} />
-                  Get Your Personalized Analysis
+                  Get Your Wealth Strategy Analysis
                 </button>
               </div>
             </div>

@@ -255,16 +255,38 @@ const Index = () => {
     annualizedReturn: "12.6%"
   };
 
-  // Financing costs table
-  const financingCosts = [
-    { item: "Mortgage (P&I)", monthlyUSD: "$37,810" },
-    { item: "Property Taxes", monthlyUSD: "$2,000" },
-    { item: "HOA/Club Fees", monthlyUSD: "$525" },
-    { item: "Insurance", monthlyUSD: "$2,083" },
-    { item: "Maintenance Reserve", monthlyUSD: "$2,917" },
-    { item: "Utilities/Overhead", monthlyUSD: "$3,750" },
-    { item: "Property Management", monthlyUSD: "$8,333" },
-    { item: "TOTAL MONTHLY", monthlyUSD: "$57,418" }
+  // Strategic Investment Benefits for HNWIs
+  const investmentBenefits = [
+    {
+      title: "Portfolio Diversification",
+      description: "Add Caribbean luxury real estate to your investment portfolio with USD-denominated returns",
+      value: "7.14% Yield",
+      icon: "shield"
+    },
+    {
+      title: "Smart Leverage Strategy", 
+      description: "60% financing available - preserve $2.8M liquidity for diversified investments",
+      value: "60% LTV",
+      icon: "zap"
+    },
+    {
+      title: "Tax Optimization Benefits",
+      description: "Depreciation deductions + foreign real estate tax advantages for international investors",
+      value: "$70K+/yr",
+      icon: "target"
+    },
+    {
+      title: "Passive Income Generation",
+      description: "Professional property management delivers $41,667 monthly rental income hands-free",
+      value: "$500K/yr",
+      icon: "trophy"
+    },
+    {
+      title: "Legacy Wealth Building",
+      description: "Generational asset with family vacation benefits + estate planning advantages",
+      value: "Generational",
+      icon: "users"
+    }
   ];
 
   // Points of interest for neighborhood
@@ -395,7 +417,7 @@ const Index = () => {
       <div role="region" aria-label="ROI and financing analysis">
         <ROIFinancingSection
           roiMetrics={roiMetrics}
-          financingCosts={financingCosts}
+          investmentBenefits={investmentBenefits}
           onROIDownload={handleROIDownload}
           onFinancingDownload={handleFinancingDownload}
           onPersonalizedWorksheet={handlePersonalizedWorksheet}

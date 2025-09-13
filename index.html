@@ -1,47 +1,55 @@
-<!DOCTYPE html>
+<!--
+  src/index.html
+  Reviewed & rewritten for subfolder deployment (e.g. /villaducacique/)
+  - All asset URLs use relative paths (./...) so they work when the site is served from a subfolder.
+  - Minimal, accessible meta tags.
+  - Script uses a module entry (Vite-style). If your build output uses a different entry (e.g. ./dist/main.js),
+    update the <script> src at the bottom accordingly before deploying the build.
+  - If you prefer the alternate approach (use a <base href="/villaducacique/">), set that in this file instead of the relative paths.
+-->
+
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/ExellDreamEstate_favicon.webp" type="image/webp" />
-    <title>Villa du Cacique — Luxury Villa for Sale in Casa de Campo</title>
-    <meta name="description" content="Own Villa du Cacique in Casa de Campo, Dominican Republic. Tailored financing + premium rental program can offset ownership — private viewings available. Enjoy the villa, not the bills." />
-    <meta name="keywords" content="casa de campo luxury villa, teeth of the dog golf course, dominican republic real estate, luxury property investment, villa du cacique" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Villa Du Cacique - $7M Luxury Estate | Casa de Campo" />
-    <meta property="og:description" content="Casa de Campo's #1 luxury property: 6BR/6+3BA villa on Teeth of the Dog golf course. $500K annual rental income." />
-    <meta property="og:image" content="https://cdn.resize.sparkplatform.com/cdc/1280x1024/true/20241017143027022294000000-o.jpg" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Villa Du Cacique — Exell Dream Estate</title>
+    <meta name="description" content="Villa Du Cacique — Luxury villa in Casa de Campo. Private viewings and investment opportunities." />
+    <meta name="keywords" content="villa du cacique, casa de campo, luxury villa, real estate, investment" />
+
+    <!-- Social preview (edit image path if your OG image has a different name) -->
+    <meta property="og:title" content="Villa Du Cacique — Exell Dream Estate" />
+    <meta property="og:description" content="Luxury villa in Casa de Campo — private viewings & investment opportunities." />
+    <meta property="og:type" content="website" />
+    <!-- Example: ./og-image.webp (optional) -->
+    <!-- <meta property="og:image" content="./og-image.webp" /> -->
+
+    <!-- Favicon & web manifest (relative paths) -->
+    <link rel="icon" href="./ExellDreamEstate_favicon.webp" type="image/webp" />
+    <link rel="apple-touch-icon" href="./Exell_DreamEstate_favicon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+
+    <meta name="theme-color" content="#ffffff" />
   </head>
 
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- App root -->
+    <div id="root" aria-live="polite"></div>
 
-    <!-- CONVOCORE AI Agent Integration -->
-    <div style="width: 0; height: 0;" id="VG_OVERLAY_CONTAINER">
-        <!-- Here is where CONVOCORE renders the widget. -->
-    </div>
+    <!-- Your app entry (Vite / modern module). Adjust path if your production build outputs to a different file. -->
+    <script type="module" src="./src/main.tsx"></script>
 
-    <script>
-        (function() {
-            window.VG_CONFIG = {
-                ID: "OlonIcHDsj69WNAgYRNg", // Agent ID
-                region: 'eu', // Account region 
-                render: 'bottom-right', // Widget position
-                stylesheets: [
-                    // Base CONVOCORE CSS
-                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
-                ],
-            }
-            var VG_SCRIPT = document.createElement("script");
-            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
-            document.body.appendChild(VG_SCRIPT);
-        })()
-    </script>
+    <!--
+      NOTES:
+      - Use relative paths (./...) for all assets referenced inside HTML so they resolve under /villaducacique/.
+      - If you deploy the built static files (dist/build) rather than the source tree, change the script src to the built entry
+        (for example: ./assets/index-XXXX.js or ./dist/main.js) — whichever your bundler produces.
+      - If you prefer a single quick fix for many absolute "/" references, you can alternatively add:
+          <base href="/villaducacique/">
+        at the top of <head>. That will make absolute-root URLs resolve to the subfolder, but can affect routing and some external URLs,
+        so I defaulted to relative paths here.
+    -->
   </body>
 </html>

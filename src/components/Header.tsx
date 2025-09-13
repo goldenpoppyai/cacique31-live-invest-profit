@@ -57,7 +57,7 @@ const Header: React.FC = () => {
             aria-label="Call Exell Dream Estate"
           >
             <Phone size={16} />
-            <span className="text-sm">+1 809-xxx-xxxx</span>
+            <span className="text-sm">+32 476 87 22 40</span>
           </a>
 
           {/* Mobile menu toggle */}

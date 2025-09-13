@@ -314,7 +314,7 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
               </h3>
               
               <p className="text-muted-foreground mb-6">
-                Your request has been received. Check your email for the confidential brochure and we will contact you within 24 hours to schedule your private tour.
+                Your request has been received. We will contact you within 24 hours to schedule your private tour.
               </p>
 
               <div className="bg-gradient-elegant p-4 rounded-lg mb-6">

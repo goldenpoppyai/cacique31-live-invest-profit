@@ -232,7 +232,7 @@ const ContactGatedFlow: React.FC<ContactGatedFlowProps> = ({
             Request Your Private Tour
           </h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6b6b6b' }}>
-            Discover every detail of Villa Du Cacique: floor plans, amenities, and income potential. Fill in your info, and receive the confidential brochure instantly.
+            Discover every detail of Villa Du Cacique: amenities, and income potential. Fill in your info, and we will contact you within 24 hours.
           </p>
         </div>
 

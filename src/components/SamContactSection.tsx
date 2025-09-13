@@ -1,161 +1,91 @@
-/**
- * SamContactSection Component
- * 
- * Professional contact section featuring Sam Vekemans
- * Positions him as a luxury real estate specialist
- */
+// src/components/SamContactSection.tsx
+import React from "react";
 
-import React from 'react';
-import { Phone, Mail, Linkedin, MapPin, Star, Award } from 'lucide-react';
+interface SamContactSectionProps {
+  agentName?: string;
+  title?: string;
+  phone?: string; // readable format (will be sanitized for tel:)
+  email?: string;
+  imageSrc?: string;
+  bookingUrl?: string;
+  className?: string;
+}
 
-const SamContactSection: React.FC = () => {
+const sanitizeTel = (phone?: string) => {
+  if (!phone) return "";
+  // keep plus and digits only
+  return phone.replace(/[^\d+]/g, "");
+};
+
+const SamContactSection: React.FC<SamContactSectionProps> = ({
+  agentName = "Sam Vekemans",
+  title = "Lead Agent — Exell Dream Estate",
+  phone = "+1 809-xxx-xxxx",
+  email = "sam@example.com",
+  imageSrc = "./SamVekemans.webp",
+  bookingUrl = "./contact",
+  className = "",
+}) => {
+  const telHref = `tel:${sanitizeTel(phone)}`;
+  const mailHref = `mailto:${email}`;
+
   return (
-    <section className="py-20 bg-gradient-to-br from-background to-muted/20" role="region" aria-label="Contact Sam Vekemans">
-      <div className="container-luxury">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#121212' }}>
-              Meet Your Luxury Real Estate Specialist
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Exclusive properties deserve exclusive service. Let Sam guide you to your perfect luxury investment.
-            </p>
+    <section
+      className={`py-12 bg-transparent ${className}`}
+      aria-labelledby="sam-contact-heading"
+    >
+      <div className="container-luxury flex flex-col sm:flex-row items-center gap-6">
+        <figure className="flex-shrink-0">
+          <img
+            src={imageSrc}
+            alt={`${agentName} — ${title}`}
+            className="w-28 h-28 rounded-full object-cover shadow-lg"
+            loading="lazy"
+            width={112}
+            height={112}
+          />
+        </figure>
+
+        <div className="flex-1">
+          <h3 id="sam-contact-heading" className="text-2xl font-semibold">
+            {agentName}
+          </h3>
+          <p className="text-sm text-background/70 mb-4">{title}</p>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <a
+              href={telHref}
+              className="inline-flex items-center gap-2 rounded-md px-4 py-2 border border-gray-200 bg-white text-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent"
+              aria-label={`Call ${agentName}`}
+            >
+              <span className="font-medium">Call</span>
+              <span className="sr-only"> {agentName}</span>
+              <span className="text-sm text-muted">{phone}</span>
+            </a>
+
+            <a
+              href={mailHref}
+              className="inline-flex items-center gap-2 rounded-md px-4 py-2 border border-gray-200 bg-white text-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent"
+              aria-label={`Email ${agentName}`}
+            >
+              <span className="font-medium">Email</span>
+              <span className="sr-only"> {agentName}</span>
+            </a>
+
+            <a
+              href={bookingUrl}
+              className="inline-flex items-center gap-2 rounded-md px-4 py-2 bg-accent text-white text-sm hover:bg-accent/95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              aria-label={`Schedule a viewing with ${agentName}`}
+            >
+              Schedule viewing
+            </a>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Sam's Photo & Credentials */}
-              <div className="relative p-8 lg:p-12 bg-gradient-to-br from-primary/10 to-primary/5">
-                <div className="text-center">
-                  <div className="relative inline-block mb-6">
-                    <img
-                      src="/SamVekemans.webp"
-                      alt="Sam Vekemans - Luxury Real Estate Specialist"
-                      className="w-32 h-32 rounded-full object-cover shadow-xl border-4 border-white"
-                      onError={(e) => {
-                        // Fallback if image doesn't load
-                        const target = e.target as HTMLImageElement;
-                        target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiByeD0iNjQiIGZpbGw9IiNCMTk3NjIiLz4KPHN2ZyB4PSIzMiIgeT0iMzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xMiAxMmMtMS4xIDAtMi0uOS0yLTJzLjktMiAyLTIgMiAuOSAyIDItLjkgMi0yIDJ6TTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6TTEyIDIwYy0xLjc0IDAtMy4zNC0uNTYtNC42NS0xLjUxQzguOTQgMTYuOSAxMC40NCAxNiAxMiAxNnMzLjA2LjkgNC42NSAyLjQ5QzE1LjM0IDE5LjQ0IDEzLjc0IDIwIDEyIDIweiIvPgo8L3N2Zz4KPC9zdmc+';
-                      }}
-                    />
-                    <div className="absolute -bottom-2 -right-2 bg-primary text-white rounded-full p-2 shadow-lg">
-                      <Award size={16} />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#121212' }}>
-                    Sam Vekemans
-                  </h3>
-                  
-                  <p className="text-lg font-medium mb-4" style={{ color: '#b19762' }}>
-                    Luxury Real Estate Specialist
-                  </p>
-
-                  <div className="flex justify-center items-center gap-1 mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={20} fill="#b19762" style={{ color: '#b19762' }} />
-                    ))}
-                    <span className="ml-2 text-sm text-muted-foreground">Verified Expert</span>
-                  </div>
-
-                  <div className="space-y-3 text-left">
-                    
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Information & CTA */}
-              <div className="p-8 lg:p-12">
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-xl font-semibold mb-4" style={{ color: '#121212' }}>
-                      Direct Contact
-                    </h4>
-                    
-                    <div className="space-y-4">
-                      <a 
-                        href="tel:+32476872240"
-                        className="flex items-center gap-4 p-4 rounded-xl border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group"
-                      >
-                        <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                          <Phone size={20} style={{ color: '#b19762' }} />
-                        </div>
-                        <div>
-                          <p className="font-medium" style={{ color: '#121212' }}>
-                            +32 476 87 22 40
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            Direct line for priority service
-                          </p>
-                        </div>
-                      </a>
-
-                      <a 
-                        href="mailto:sam@exelldreamestate.com"
-                        className="flex items-center gap-4 p-4 rounded-xl border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group"
-                      >
-                        <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                          <Mail size={20} style={{ color: '#b19762' }} />
-                        </div>
-                        <div>
-                          <p className="font-medium" style={{ color: '#121212' }}>
-                            sam@exelldreamestate.com
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            Confidential inquiries welcome
-                          </p>
-                        </div>
-                      </a>
-
-                      <a 
-                        href="https://www.linkedin.com/in/sam-vekemans-exell"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 rounded-xl border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group"
-                      >
-                        <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                          <Linkedin size={20} style={{ color: '#b19762' }} />
-                        </div>
-                        <div>
-                          <p className="font-medium" style={{ color: '#121212' }}>
-                            LinkedIn Profile
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            View professional credentials
-                          </p>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-border pt-6">
-                    <h5 className="font-semibold mb-3" style={{ color: '#121212' }}>
-                      Expertise & Specializations:
-                    </h5>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li>• International buyer representation</li>
-                      <li>• Investment property analysis</li>
-                      <li>• Discreet off-market transactions</li>
-                      <li>• Property management coordination</li>
-                    </ul>
-                  </div>
-
-                  <div className="pt-4">
-                    <button
-                      onClick={() => {
-                        const contactSection = document.querySelector('[aria-label="Contact and scheduling"]');
-                        contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }}
-                      className="w-full px-6 py-4 text-lg font-semibold text-white rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                      style={{ background: 'linear-gradient(135deg, #b19762, #a08856)' }}
-                    >
-                      Schedule Private Consultation
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <p className="mt-4 text-sm text-background/60 max-w-xl">
+            For private viewings, financing options, and investment queries,
+            reach out to {agentName} directly — expert guidance for high-net-worth
+            buyers and off-market opportunities.
+          </p>
         </div>
       </div>
     </section>

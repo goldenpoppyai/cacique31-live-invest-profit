@@ -1,171 +1,94 @@
-/**
- * Footer Component - Exell Dream Estate
- * 
- * Complete footer with branding, contact info, social links,
- * and luxury properties navigation
- */
+// src/components/Footer.tsx
+import React from "react";
+import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
 
-import React from 'react';
-import { Phone, Mail, MapPin, ExternalLink, Linkedin } from 'lucide-react';
+/**
+ * Footer — Exell Dream Estate
+ *
+ * - Uses relative paths (./...) so assets load when deployed under a subfolder.
+ * - Accessible landmarks and concise content for clarity.
+ * - Replace phone/email/links with real values as needed.
+ */
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-foreground text-background py-16">
-      <div className="container-luxury">
-        <div className="grid md:grid-cols-3 gap-12">
-          
-          {/* Company Info */}
+    <footer className="bg-foreground text-background">
+      <div className="container-luxury py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Branding */}
           <div>
-            <div className="flex items-center gap-4 mb-6">
+            <a href="./" aria-label="Exell Dream Estate home" className="inline-flex items-center gap-3">
               <img
-                src="/ExellDreamEstate_logo_whiteBG.webp"
-                alt="Exell Dream Estate Logo"
-                className="w-12 h-12 object-contain bg-white rounded-lg p-1"
-                onError={(e) => {
-                  // Fallback to text logo if image fails to load
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
+                src="./ExellDreamEstate_logo_whiteBG.webp"
+                alt="Exell Dream Estate logo"
+                className="h-10 w-auto"
+                width={160}
+                height={40}
+                loading="eager"
               />
-              <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center" style={{ display: 'none' }}>
-                <span className="text-accent-foreground font-bold text-xl">E</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-background mb-0">
-                  Exell Dream Estate
-                </h3>
-                <p className="text-background/70 text-sm">
-                  Luxury Real Estate
-                </p>
-              </div>
-            </div>
-            
-            <p className="text-background/70 leading-relaxed mb-6">
-              Our luxury real estate team specializes in exclusive properties and guides you through every aspect of the acquisition process, from private viewings to financing arrangements.
+            </a>
+
+            <p className="mt-4 text-sm text-background/70 max-w-sm">
+              Exell Dream Estate — Luxury real estate advisory and curated property listings in the Caribbean.
             </p>
 
-            {/* Social Links */}
-            <div className="flex gap-4">
-              <a 
-                href="https://www.linkedin.com/company/exell-dream-estate/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
-              >
-                <Linkedin size={20} />
-                <span>LinkedIn</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div>
-            <h4 className="text-lg font-semibold text-background mb-4">
-              Contact Us
-            </h4>
-            
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <Phone size={18} className="text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <a 
-                    href="tel:+32476872240"
-                    className="text-background hover:text-accent transition-colors"
-                  >
-                    +32 476 87 22 40
-                  </a>
-                </div>
+            <div className="mt-4 space-y-2 text-sm text-background/70">
+              <div className="flex items-center gap-2">
+                <MapPin size={16} />
+                <span>Casa de Campo, La Romana, Dominican Republic</span>
               </div>
-              
-              <div className="flex items-start gap-3">
-                <Mail size={18} className="text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <a 
-                    href="mailto:sam@exelldreamestate.com"
-                    className="text-background hover:text-accent transition-colors"
-                  >
-                    sam@exelldreamestate.com
-                  </a>
-                </div>
+              <div className="flex items-center gap-2">
+                <Phone size={16} />
+                <a className="underline" href="tel:+1809xxxxxxx">+1 809-xxx-xxxx</a>
               </div>
-              
-              <div className="flex items-start gap-3">
-                <MapPin size={18} className="text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-background/70">
-                    Dubai, United Arab Emirates
-                  </p>
-                </div>
+              <div className="flex items-center gap-2">
+                <Mail size={16} />
+                <a className="underline" href="mailto:info@exelldreamestate.com">info@exelldreamestate.com</a>
               </div>
             </div>
           </div>
 
-          {/* Other Properties */}
+          {/* Quick links */}
           <div>
-            <h4 className="text-lg font-semibold text-background mb-4">
-              Other Luxury Properties
-            </h4>
-            
-            <div className="space-y-3">
-              <div className="p-4 bg-background/10 rounded-lg">
-                <p className="text-background/70 text-sm">
-                  Exclusive listings coming soon
-                </p>
-                <a 
-                  href="#"
-                  className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors text-sm mt-2"
-                >
-                  View Portfolio
+            <h4 className="text-base font-semibold mb-3">Explore</h4>
+            <ul className="space-y-2 text-sm text-background/70">
+              <li><a href="./#about" className="hover:underline">About Villa</a></li>
+              <li><a href="./#features" className="hover:underline">Features</a></li>
+              <li><a href="./#virtual-tour" className="hover:underline">Virtual Tour</a></li>
+              <li><a href="./#contact" className="hover:underline">Contact & Viewings</a></li>
+            </ul>
+          </div>
+
+          {/* Resources & legal */}
+          <div>
+            <h4 className="text-base font-semibold mb-3">Resources</h4>
+            <ul className="space-y-2 text-sm text-background/70">
+              <li>
+                <a href="./Exell_Financing.pdf" className="flex items-center gap-2 hover:underline" download>
                   <ExternalLink size={14} />
+                  Financing PDF
                 </a>
-              </div>
-            </div>
-
-            {/* Sam's Photo */}
-            <div className="mt-6 p-4 bg-background/10 rounded-lg">
-              <img
-                src="/SamVekemans.webp"
-                alt="Sam Vekemans - Luxury Real Estate Specialist"
-                className="w-16 h-16 rounded-full mb-3 object-cover"
-                onError={(e) => {
-                  // Fallback to initials if image fails to load
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
-              />
-              <div className="w-16 h-16 bg-accent/20 rounded-full mb-3 flex items-center justify-center" style={{ display: 'none' }}>
-                <span className="text-accent text-xl font-bold">SV</span>
-              </div>
-              <p className="text-background/70 text-sm">
-                <strong className="text-background">Sam Vekemans</strong><br />
-                Luxury Real Estate Specialist
-              </p>
-            </div>
+              </li>
+              <li>
+                <a href="./Exell_ROI.pdf" className="flex items-center gap-2 hover:underline" download>
+                  <ExternalLink size={14} />
+                  ROI Overview
+                </a>
+              </li>
+              <li>
+                <a href="./robots.txt" className="hover:underline">robots.txt</a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Legal Disclaimers */}
-        <div className="border-t border-background/20 mt-12 pt-8">
-          <div className="text-background/60 text-sm space-y-4">
-            <p>
-              <strong>DISCLAIMER:</strong> All figures are estimates and must be independently verified. 
-              Actual payments may vary by lender, buyer profile, and prevailing interest rates at time of purchase. 
-              Consult a legal and tax advisor before making any financial commitments.
-            </p>
-            
-            <p>
-              All placeholder content marked [PLACEHOLDER] requires verification with appropriate professionals. 
-              Property specifications, financial projections, and legal requirements subject to change.
-            </p>
-            
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4">
-              <p>&copy; 2025 Exell Dream Estate. All rights reserved.</p>
-              <p>Villa Du Cacique - Casa de Campo Exclusive Listing</p>
-            </div>
+        <div className="mt-8 border-t border-background/10 pt-6 text-sm text-background/60 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>&copy; {new Date().getFullYear()} Exell Dream Estate. All rights reserved.</div>
+
+          <div className="flex items-center gap-4">
+            <a href="./" className="hover:underline">Privacy</a>
+            <a href="./" className="hover:underline">Terms</a>
+            <a href="./#contact" className="inline-flex items-center gap-2 px-3 py-1 rounded bg-background/5 text-sm">Contact</a>
           </div>
         </div>
       </div>

@@ -35,15 +35,15 @@ const Footer: React.FC = () => {
             <div className="mt-4 space-y-2 text-sm text-background/70">
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                <span>Casa de Campo, La Romana, Dominican Republic</span>
+                <span>Dubai, United Arab Emirates</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={16} />
-                <a className="underline" href="tel:+1809xxxxxxx">+1 809-xxx-xxxx</a>
+                <a className="underline" href="tel:+1809xxxxxxx">+32 476 87 22 40</a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={16} />
-                <a className="underline" href="mailto:info@exelldreamestate.com">info@exelldreamestate.com</a>
+                <a className="underline" href="mailto:info@exelldreamestate.com">sam@exelldeamestate.com</a>
               </div>
             </div>
           </div>
@@ -74,9 +74,6 @@ const Footer: React.FC = () => {
                   <ExternalLink size={14} />
                   ROI Overview
                 </a>
-              </li>
-              <li>
-                <a href="./robots.txt" className="hover:underline">robots.txt</a>
               </li>
             </ul>
           </div>
